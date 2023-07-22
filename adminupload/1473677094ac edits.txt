@@ -1,0 +1,9 @@
+6. Offer Deal? if No, Disable Button and display Currently ni offers text and blank on right side. Deal Title not dispaying.
+7.mobile numbers for vouchurs code sent should be valid for 30days. within 30 days id request again for same mobile number alert " already sent
+1.home Page banners not going to the url, 2.home page Category blocks : only text should come without image if no image is uploaded (see timesads.com)
+
+2. Never married , Dull children
+5.in JS, no alert when sending message without selecting
+
+4. in Classifieds, there is no provision in Admin to add titles for categories
+3 name of company not taking in search

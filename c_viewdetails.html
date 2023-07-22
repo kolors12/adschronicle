@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Ads Chronicle&reg;</title>
+<link rel="stylesheet" href="css/my_style.css" type="text/css">
+<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<script
+src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+</script>
+<script>
+var myCenter=new google.maps.LatLng(17.358564, 78.526127);
+var marker;
+
+function initialize()
+{
+var mapProp = {
+  center:myCenter,
+  zoom:16,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+marker=new google.maps.Marker({
+  position:myCenter,
+  animation:google.maps.Animation.BOUNCE
+  });
+
+marker.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+</head>
+
+<body style="background-color:#eee">
+<div class="container shadow"  style="background-color:#fff">
+  <header>
+    <div class="row" style="padding:5px 0px 5px 0px">
+      <div class="col-md-3 hidden-xs" align="center"> <a href="index.php"><img src="images/logo.png" class="img-responsive cen" style="padding-bottom:10px; padding-top:5px"  alt=""/></a> </div>
+      <div class="col-xs-12 hidden-lg hidden-md hidden-sm" align="center"> <a href="index.php"><img src="images/smalllogo.png" class="img-responsive cen" style="padding-bottom:10px; padding-top:5px"  alt=""/></a> </div>
+      <div class="col-md-9 hidden-xs">
+        <div class="row">
+          <div class="col-md-4 padd5">
+            <div class="th">
+              <div class="jR3DCarouselGallery"></div>
+            </div>
+          </div>
+          <div class="col-md-4 padd5">
+            <div class="th">
+              <div class="jR3DCarouselGallery"></div>
+            </div>
+          </div>
+          <div class="col-md-4 padd5">
+            <div class="th">
+              <div class="jR3DCarouselGallery"></div>
+            </div>
+          </div>
+          <div class="col-md-4 padd5">
+            <div class="th">
+              <div class="jR3DCarouselGallery"></div>
+            </div>
+          </div>
+          <div class="col-md-4 padd5">
+            <div class="th">
+              <div class="jR3DCarouselGallery"></div>
+            </div>
+          </div>
+          <div class="col-md-4 padd5">
+            <div class="th">
+              <div class="jR3DCarouselGallery"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="background-color:#01ADED; padding:5px 0px">
+      <div class="col-md-12"> <a class="btn btn-primary" href="categories.html" role="button">Back</a> </div>
+    </div>
+  </header>
+  <div class="row" style="padding:10px 0px 0px 0px;">
+    <div class="col-md-12" style="padding-bottom:10px"> Home>Categories>Training Institutes>All Localities/Ameerpet>CMS Computer Institute </div>
+    <div class="col-md-12" style="background-image:url(images/bg-b.jpg); margin-bottom:10px">
+      <div style="font-size:16px; color:#fff; font-weight:bold; padding:10px" align="center">CMS Computer Institute  -  Ameerpet</div>
+    </div>
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-5">
+              <div  style="background-color:#f5f5f5; padding:10px">
+                <div id="cf7"> <img class='opaque wh' src="images/ad.jpg"  /> <img class='wh' src="images/ad1.jpg" /> <img class='wh' src="images/ad.jpg" /> <img  class='wh'src="images/ad1.jpg" /> <img class='wh' src="images/ad.jpg" /> <img  class='wh'src="images/ad1.jpg" /> </div>
+                <div id="cf7_controls" align="center"> <span class="selected"><img src="images/ad.jpg" style="width:50px; height:50px" /></span> <span><img src="images/ad1.jpg" style="width:50px; height:50px" /></span> <span><img src="images/ad.jpg" style="width:50px; height:50px" /></span> <span><img src="images/ad1.jpg" style="width:50px; height:50px" /></span> <span><img src="images/ad.jpg" style="width:50px; height:50px" /></span> <span><img src="images/ad1.jpg" style="width:50px; height:50px" /></span> </div>
+              </div>
+              <script>
+$(document).ready(function() {
+  $("#cf7_controls").on('click', 'span', function() {
+    $("#cf7 img").removeClass("opaque");
+
+    var newImage = $(this).index();
+
+    $("#cf7 img").eq(newImage).addClass("opaque");
+
+    $("#cf7_controls span").removeClass("selected");
+    $(this).addClass("selected");
+  });
+});
+</script> 
+            </div>
+            <div class="col-md-7" align="justify">
+              <div style="overflow:scroll; height:430px; padding:5px">
+                <p><strong style="color:#01ADED">CMS Computer Institute</strong></p>
+                <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatisv. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis.</p>
+                <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis.</p>
+                <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis</p>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <br>
+            <div class="col-md-12" style="margin-bottom:10px">
+              <div  style="background-image:url(images/bg-b.jpg);" align="center">
+                <p style="color:#F30; padding:10px"><i class="glyphicon glyphicon-download-alt"></i> <strong>Download Brochure/Profile of this Advertiser</strong></p>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+            <div class="col-md-6">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-bordered">
+                <tr>
+                  <td valign="top"><strong><i class="glyphicon glyphicon-earphone"></i> Phone/Mobile</strong></td>
+                  <td valign="top">+91 0000 000 000</td>
+                </tr>
+                <tr>
+                  <td valign="top"><strong><i class="
+glyphicon glyphicon-map-marker"></i> Address</strong></td>
+                  <td valign="top">Annapurna Publishers<br>
+                    22-113C, Saraswathi Nagar Colony, <br>
+                    Saroornagar Road, Hyderabad - 500060<br>
+                    Telangana, India.</td>
+                </tr>
+                <tr>
+                  <td valign="top"><strong><i class="
+glyphicon glyphicon-envelope"></i> Email-id</strong></td>
+                  <td valign="top">info@adschroniclent.com</td>
+                </tr>
+                <tr>
+                  <td valign="top"><strong><i class="
+glyphicon glyphicon-globe"></i> Website</strong></td>
+                  <td valign="top">www.adschroniclent.com</td>
+                </tr>
+                <tr>
+                  <td valign="top"><strong><i class="
+glyphicon glyphicon-user"></i> Contact Person</strong></td>
+                  <td valign="top">B Srinivas</td>
+                </tr>
+                <tr>
+                  <td valign="top"><strong><i class="
+glyphicon glyphicon-time"></i> Working Hours</strong></td>
+                  <td valign="top">Monday - Saturday: 8:00am to 8:00pm</td>
+                <tr>
+                  <td valign="top"><strong><i class="
+glyphicon glyphicon-tags"></i> Services Offered</strong></td>
+                  <td valign="top">Training</td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-6" >
+              <div style="background-color:#f5f5f5; padding:10px">
+                <form>
+                  <h4>Contact CMS Computer Instite</h4>
+                  <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" placeholder="Full Name" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
+                  </div>
+                  <br>
+                  <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                    <input type="text" placeholder="Mobile No" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
+                  </div>
+                  <br>
+                  <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input type="text" placeholder="Email-id" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <textarea class="form-control" rows="2" placeholder="Please enter your specific requirements here"></textarea>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox">
+                      I want similar Administration Training Centers to contact me </label>
+                  </div>
+                  <button type="submit" class="btn btn-info">Submit</button>
+                  <button type="reset" class="btn btn-info">Reset</button>
+                </form>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12"> <a class="read-more change_color" role="button" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">Save this Advertiser's details in your Email</a> </div>
+            <div class="col-md-12" style="padding-top:10px">
+              <div class="collapse" id="collapseExample1">
+                <div >
+                  <div class="well">
+                    <div class="row" style="padding-top:15px">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Full Name">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Mobile No">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email-Id">
+                        </div>
+                      </div>
+                      <div class="col-md-3" align="center">
+                        <button type="submit"  style="width:80%"class="btn btn-primary">SAVE</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+              <div  style="background-image:url(images/bg-b.jpg);">
+                <div class="row" style="padding:20px 20px 5px 20px">
+                  <div class="col-md-4" id="smap">
+                    <div id="googleMap" style="width:100%;height:260px;"></div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="panel panel-default">
+                      <div class="panel-heading " align="center"><strong style="color:#F30">DEAL OF THE DAY OFFER</strong></div>
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p><strong>Deal Name</strong></p>
+                            <p>Deal Details</p>
+                          </div>
+                          <div class="col-md-6"> <img src="images/ad1.jpg" style="width:100%; height:135px"  alt=""/> </div>
+                          <div class="clearfix"></div>
+                          <div class="col-md-12" style="padding-top:15px" align="center"> <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#myModalcoupon" role="button"><i class="glyphicon glyphicon-thumbs-up"></i> Get Coupon Code</a> </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <footer>
+    <div class="row" style="background-color:#212121; color:#666; padding:15px 0px 15px 0px; ">
+      <div class="col-md-12">
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/jus.jpg" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Advocates</small></div>
+        </div>
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/astr.jpg" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Astrology</small></div>
+        </div>
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/apparel.jpg" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Apparels</small></div>
+        </div>
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/brides.gif" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Brides</small></div>
+        </div>
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/taxi.jpg" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Cabs</small></div>
+        </div>
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/auto.jpg" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Clubs</small></div>
+        </div>
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/mob.jpg" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Mobiles</small></div>
+        </div>
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/travel4.jpg" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Travel</small></div>
+        </div>
+        <div class="col-md-1 padd5" align="center">
+          <div class="th1"> <img src="images/security.jpg" style="width:100%; height:50px"  alt=""/> </div>
+          <div><small>Security</small></div>
+        </div>
+        <div class="col-md-3 padd5" align="center">
+          <div class="th1"> <img src="images/cmore.png" style="width:100%; height:60px"  alt=""/> </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div style="margin-bottom:10px; border-bottom:1px #999 dotted"> </div>
+      <div class="col-md-12" align="center">
+        <p style="padding-bottom:10px"><a href="index.php">Home</a> | <a href="aboutus.html">About us</a> | <a href="advetise.html">Advetise with us</a> | <a href="terms_conditions.html">Terms & Conditions</a> | <a href="customer_care.html">Customer Care</a> | <a href="suggestions.html">Suggestions/Feedback</a> | <a href="contactus.html">Contact us</a> | <a href="franchisees.html">Franchisees/Resellers Invited</a></p>
+        <small style="color:#444">@ 2015 All rights Reserved, <a href="http://adschronicle.com/" style="color:#666">Ads Chronicle</a> is a Registered Trademark. Imitation of design and functionality will attract legal action.</small> </div>
+    </div>
+  </footer>
+</div>
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/collapse.js" type="text/javascript"></script>
+<div class="modal fade" id="myModalcoupon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Get Coupon Code</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <form>
+              <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" placeholder="Full Name" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
+              </div>
+              <br>
+              <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                <input type="text" placeholder="Mobile No" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
+              </div>
+              <br>
+              <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input type="text" placeholder="EMail-id" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
+              </div>
+              <br>
+              <button type="submit" class="btn btn-info">Get Coupon No.</button>
+            </form>
+          </div>
+          <div class="col-md-6" align="right"> <img src="images/coupon-codes.png" class="img-responsive"  alt=""/> </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

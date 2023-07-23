@@ -654,11 +654,11 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                                     </div>\
                                     <div class="col-md-1">\
                                         <div class="form-group mb-2">\
-                                           <button type="button" class="remove-btn btn btn-danger"><span>&#45;</span></button>\
+                                           <button type="button" class="remove-btn btn btn-danger"><span>&#45;`</span></button>\
                                         </div>\
                                     </div>\
                                 </div>\
-                            </div>');
+                            </div>');`
             });
 
         });

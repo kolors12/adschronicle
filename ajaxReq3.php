@@ -10,8 +10,8 @@ if(isset($_POST) && $_POST['action']=='fetchexp') {
       echo "<option value='".$crow[2]."'>".$crow[2]."</option>";
 	} 
  } 
-else if(isset($_POST) && $_POST['action']=='fetchexp10') {
-    $cid = stripslashes($_POST['cidd']);	
+else if(isset($_POST) && $_POST['action']=='fetchexp1') {
+    $cid = stripslashes($_POST['cid']);	
 	$cth = $db->query ("SELECT * FROM `specialisation` WHERE `sid`='$cid' order by name asc"); 
 ?>
     <option value="">Select Area</option>

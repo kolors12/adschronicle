@@ -11,10 +11,11 @@ if(isset($_POST) && $_POST['action']=='fetchexp') {
 	} 
  } 
 else if(isset($_POST) && $_POST['action']=='fetchexp1') {
+    //echo "hi";
     $cid = stripslashes($_POST['cid']);	
 	$cth = $db->query ("SELECT * FROM `specialisation` WHERE `sid`='$cid' order by name asc"); 
 ?>
-    <option value="">Select Ppecialisation</option>
+    <option value="">Select Specialisation</option>
 	<?php while($crow = $cth->fetch()) {  
       echo "<option value='".$crow[0]."'>".$crow[2]."</option>";
 	} 

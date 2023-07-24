@@ -310,20 +310,22 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
 
                     <div class="form-group">
                       <label  class="col-sm-4  control-label">
-                      Enter Skills</label>
+                      Enter Skills </label>
                       <div class="col-sm-6">
                         <input type="text" class="form-control required"  readonly value="<?php echo $row['txtSkills']?>" placeholder="Educational Information" />
                       </div>
                     </div>
                     <div class="form-group">
                       <label  class="col-sm-4  control-label">
-                      Enter Skills</label>
+                      Enter Skills Updated</label>
+                      <div class="col-sm-6">
                       <select multiple="multiple" name="txtSkills[]" class="SlectBox form-control required">
                 <?php $citt = $db->query("SELECT * FROM `skills` $srr ORDER BY `name` ASC");
                   while($ciroww = $citt->fetch()){ ?>
                 <option value="<?php echo $ciroww['name'] ?>" ><?php echo $ciroww['name'] ?></option>
                 <?php } ?>
               </select>
+                  </div>
                     </div>
 
                    
@@ -360,21 +362,30 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
 
                     
                    
-                    <div class="card-body col-sm-12 ">
+                    <div class="col-sm-12">
 
                       
-                            <div class="main-form mt-3 border-bottom">
-                                <div class="row">
+                         
+                              
                                     <div class="col-md-2">
                                         <div class="form-group mb-2">
                                             <label for="">Qualification</label>
-                                            <input type="text" name="Qualification[]" class="form-control" required placeholder="Qualification">
+                                          <select class="form-control required super" name="txtEducation[]" id="cid" >
+                                          <option value="">Select Qualifications</option>
+                                          <?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc");
+                                          while($row = $sth->fetch()) {
+                                          echo "<option value='".$row[0]."'>".$row['name']."</option>";
+                                          } ?>
+                                          </select>
+                                          
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group mb-2">
                                             <label for="">Specialisation</label>
-                                            <input type="text" name="Specialisation[]" class="form-control" required placeholder="Specialisation">
+                                            <select class="form-control required area" name="specialisation[]" id="aid" required>
+                    <option value="">Select Specialisation</option>
+                  </select>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -396,13 +407,13 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                                         </div>
                                     </div>
                                     <div class="col-md-1">
-                                        <div class="form-group mb-2">
-                                               <label for="">Dssssssssssssss</label>
+                                        <div class="form-group">
+                                               <label for="">dfdffffffffsd</label>
                                         <a href="javascript:void(0)" class="add-more-form float-end btn btn-success"><span>&#43;</span></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                              
+                           
 
                             <div class="paste-new-forms"></div>
 
@@ -614,9 +625,24 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
 				});
 			});
 	</script> 
+	<script> 
 
-
-
+    
+    $('.super').change(function(){
+      
+    var cid= $(this).val();
+    console.log(cid);
+    $.ajax({
+    type:"post",
+    url:"http://localhost/adschronicle//ajaxReq2.php",
+    data:"cid="+cid+"&action=fetchexp1",
+     success:function(response){
+      $('.area').html(response);
+    return true;
+    }
+    });
+    });
+    </script> 
     <script>
         $(document).ready(function () {
 
@@ -625,16 +651,23 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
             });
             
             $(document).on('click', '.add-more-form', function () {
-                $('.paste-new-forms').append('<div class="main-form mt-3 border-bottom">\
-                                <div class="row">\
-                                    <div class="col-md-2">\
+                $('.paste-new-forms').append('<div class="main-form mt-3 col-sm-12 border-bottom">\
+                                 <div class="col-md-2">\
                                         <div class="form-group mb-2">\
-                                            <input type="text" name="Qualification[]" class="form-control" required placeholder="Qualification">\
+                                         <select class="form-control required super" name="txtEducation[]" id="cid" >\
+                                          <option value="">Select Qualifications</option>\
+                                          <?php  $sth = $db->query ('SELECT * FROM `qualification` order by name asc');
+                                          while($row = $sth->fetch()) {
+                                          echo '<option  value='.$row[0]. '>'.$row['name'].'</option>';
+                                          }?>
+                                          </select>\
                                         </div>\
                                     </div>\
                                     <div class="col-md-2">\
                                         <div class="form-group mb-2">\
-                                            <input type="text" name="Specialisation[]" class="form-control" required placeholder="Specialisation">\
+                                            <select class="form-control required area" name="specialisation[]" id="aid" required>\
+                                             <option value="">Select Specialisation</option>\
+                                            </select>\
                                         </div>\
                                     </div>\
                                     <div class="col-md-2">\
@@ -652,13 +685,12 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                                             <input type="text" name="YearofPassing[]" class="form-control" required placeholder="Enter Year of Passing">\
                                         </div>\
                                     </div>\
-                                    <div class="col-md-1">\
+                                    <div class="col-md-2">\
                                         <div class="form-group mb-2">\
-                                           <button type="button" class="remove-btn btn btn-danger"><span>&#45;`</span></button>\
+                                           <button type="button" class="remove-btn btn btn-danger"><span>&#45;</span></button>\
                                         </div>\
                                     </div>\
-                                </div>\
-                            </div>');`
+                                    </div>');
             });
 
         });

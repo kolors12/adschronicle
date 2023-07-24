@@ -57,18 +57,18 @@
       $skill9=$_POST["yearpassing"];
         
    
-     
+    // echo "$dt";exit;
         for($i=0; $i<$count; $i++)
         {
          
 
-          //echo "INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$val','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')";exit;
-          $sth = $db->query ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$pid','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");
+          //echo "INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$pid','$dt','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')";exit;
+          $sth = $db->query ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$pid','$dt','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");
 	     
          }
   		
   		
-         //echo "INSERT INTO `jobseeker_ads`( `productid`, `pid`, `txtJobCategory`, `txtJobExp`, `txtJobStatus`, `txtName`, `txtDob`, `txtMStatus`, `txtAddress`,`txtCity`,`txtLocation`, `txtMobile`, `txtAMobile`, `txtEmail`, `specialisation`,`marks`,`university`,`yearpassing`, `txtEducation`, `txtSkills`, `txtExpSalary`, `txtDesiredLocation`, `txtAddinformation`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$txtJobCategory', '$txtJobExp', '$txtJobStatus', '$txtName', '$txtDob', '$txtMStatus', '$txtAddress','$txtCity', '$txtLocation', '$txtMobile', '$txtAMobile', '$txtEmail','$specialisation','$yearpassing','$marks','$university','$txtEducation', '$choice', '$txtExpSalary', '$txtDesiredLocation', '$txtAddinformation', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )";exit;
+         //echo "INSERT INTO `jobseeker_ads`( `productid`, `pid`, `txtJobCategory`, `txtJobExp`, `txtJobStatus`, `txtName`, `txtDob`, `txtMStatus`, `txtAddress`,`txtCity`,`txtLocation`, `txtMobile`, `txtAMobile`, `txtEmail`, `txtSkills`, `txtExpSalary`, `txtDesiredLocation`, `txtAddinformation`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$txtJobCategory', '$txtJobExp', '$txtJobStatus', '$txtName', '$txtDob', '$txtMStatus', '$txtAddress','$txtCity', '$txtLocation', '$txtMobile', '$txtAMobile', '$txtEmail', '$choice', '$txtExpSalary', '$txtDesiredLocation', '$txtAddinformation', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )";exit;
   	    $sth = $db->query ("INSERT INTO jobseeker_ads ( `productid`, `pid`, `txtJobCategory`, `txtJobExp`, `txtJobStatus`, `txtName`, `txtDob`, `txtMStatus`, `txtAddress`,`txtCity`,`txtLocation`, `txtMobile`, `txtAMobile`, `txtEmail`, `txtSkills`, `txtExpSalary`, `txtDesiredLocation`, `txtAddinformation`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$txtJobCategory', '$txtJobExp', '$txtJobStatus', '$txtName', '$txtDob', '$txtMStatus', '$txtAddress','$txtCity', '$txtLocation', '$txtMobile', '$txtAMobile', '$txtEmail', '$choice', '$txtExpSalary', '$txtDesiredLocation', '$txtAddinformation', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )");
   		$insid = $db->lastInsertId();
   		
@@ -355,7 +355,7 @@
 							<div class="col-sm-2">
               <td> 
               <label  class="control-label">University</label>
-              <input type="text" class="form-control required"  name="university[]" placeholder="University" autocomplete="off"/>
+              <input type="text" class="form-control required"  name="university[]" placeholder="University Name" autocomplete="off"/>
               </td>
               </div>
 							<div class="col-sm-1">
@@ -491,7 +491,6 @@
     });
     
     $('.super').change(function(){
-      
     var cid= $(this).val();
     $.ajax({
     type:"post",
@@ -611,7 +610,24 @@
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td> <select class="form-control required super" name="txtEducation[]" id="cid" ><option value="">Select Qualifications</option><?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc"); while($row = $sth->fetch()) { echo '<option value='.$row[0].'>'.$row['name'].'</option>'; } ?></select></td><td> <select class="form-control required area" name="specialisation[]" id="aid" required><option value="">Select Area</option></select></td> <td><input type="number" name="marks[]" placeholder="% Marks" class="form-control name_list" /></td><td><input type="text" name="university[]" placeholder="University Name" class="form-control name_list" /></td><td><input type="number" name="yearpassing[]" placeholder="Year of Passing" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td> <select class="form-control required quali" name="txtEducation[]" id="cid" ><option value="">Select Qualifications</option><?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc"); while($row = $sth->fetch()) { echo '<option value='.$row[0].'>'.$row['name'].'</option>'; } ?></select></td><td> <select class="form-control required spec" name="specialisation[]" id="aid" required><option value="">Select Specialisation</option></select></td> <td><input type="number" name="marks[]" placeholder="% Marks" class="form-control name_list" /></td><td><input type="text" name="university[]" placeholder="University Name" class="form-control name_list" /></td><td><input type="text" maxlength="4" name="yearpassing[]" placeholder="Year of Passing" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+	
+	    $('.quali').change(function(){
+     // alert('hi');
+    var cid= $(this).val();
+   //console.log(cid);
+    $.ajax({
+    type:"post",
+    url:"ajaxReq2.php",
+    data:"cid="+cid+"&action=fetchexp1",
+     success:function(response){
+      $('.spec').html(response);
+    return true;
+    }
+    });
+    });
+	    
+	    
 	});
 	
 	$(document).on('click', '.btn_remove', function(){
@@ -619,10 +635,6 @@
 		$('#row'+button_id+'').remove();
 	});
 });
-
-
-
-
 
   </script> 
 </html>

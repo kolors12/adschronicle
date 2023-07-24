@@ -184,9 +184,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			 $m = $db->query("SELECT * FROM  `jobseeker_ads_qualification` WHERE  jbaq_id='$pid'"); 
 			  while($z = $m->fetch()){
 
-          $tth = $db->query ("SELECT * FROM `qualification` WHERE `guid` = $z[2]");
+          $tth = $db->query ("SELECT * FROM `qualification` WHERE `guid` = $z[3]");
           $trow = $tth-> fetch(); 
-          $tthd = $db->query ("SELECT * FROM `specialisation` WHERE `guid` = $z[3]");
+          $tthd = $db->query ("SELECT * FROM `specialisation` WHERE `guid` = $z[4]");
           $tsugu = $tthd-> fetch(); 
 
 // print_r($tsugu['name']);exit;

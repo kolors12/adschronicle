@@ -8,8 +8,12 @@ extract($_GET);
 extract($_POST);
 $date = date('Y-m-d');
 if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
-	//print_r($_POST); exit;
-  $choice=implode(',',$_POST['txtSkills']);
+    
+    
+    //print_r($_POST); exit;
+      
+	  
+	  $choice=implode(",",$_POST['txtSkills']);
     	$file=$db->query("SELECT * FROM `jobseeker_ads` WHERE `guid`='$guid'");
     	$files= $file->fetch();
         $desc = str_replace("'","~~",$_POST['description']);
@@ -35,31 +39,51 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                 //$img.= $im_name.",";
               } 
         }
-      // echo " UPDATE `jobseeker_ads` SET `txtJobCategory`='$txtJobCategory',`txtJobExp`='$txtJobExp',`txtJobStatus`='$txtJobStatus',`txtName`='$txtName',`txtDob`='$txtDob',`txtMStatus`='$txtMStatus',`txtAddress`='$txtAddress',`txtCity`='$txtCity',`txtLocation`='$txtLocation',`txtMobile`='$txtMobile',`txtAMobile`='$txtAMobile',`txtEmail`='$txtEmail',`txtEducation`='$txtEducation',`txtSkills`='$choice',`txtExpSalary`='$txtExpSalary',`txtDesiredLocation`='$txtDesiredLocation',`txtAddinformation`='$txtAddinformation' WHERE `guid`='$guid'"; exit;
+
     	$sth = $db->query ("UPDATE `jobseeker_ads` SET `txtJobCategory`='$txtJobCategory',`txtJobExp`='$txtJobExp',`txtJobStatus`='$txtJobStatus',`txtName`='$txtName',`txtDob`='$txtDob',`txtMStatus`='$txtMStatus',`txtAddress`='$txtAddress',`txtCity`='$txtCity',`txtLocation`='$txtLocation',`txtMobile`='$txtMobile',`txtAMobile`='$txtAMobile',`txtEmail`='$txtEmail',`txtEducation`='$txtEducation',`txtSkills`='$choice',`txtExpSalary`='$txtExpSalary',`txtDesiredLocation`='$txtDesiredLocation',`txtAddinformation`='$txtAddinformation' WHERE `guid`='$guid'");
-
-
-
-      $count = count($_POST["txtEducation"]);
+    //update variant
+  
+  		       
+      $count = count($_POST["marks"]);
+      
       //Getting post values
       $skill=$_POST["txtEducation"];	
       $skill6=$_POST["specialisation"];	
       $skill7=$_POST["marks"];	
       $skill8=$_POST["university"];	
       $skill9=$_POST["yearpassing"];
+      $gu_id=$_POST["guu_id"];
         
-      $sth = $db->query ("DELETE FROM `jobseeker_ads` WHERE `js_id`='$guid'");
-    // echo "$dt";exit;
+           
         for($i=0; $i<$count; $i++)
         {
-          $sth = $db->query ("UPDATE  `jobseeker_ads_qualification` SET  `txtEducation`='$skill[$i]',`specialisation`='$skill6[$i]',`marks`='$skill7[$i]',`university`='$skill8[$i]', `yearpassing`='$skill9[$i]'  WHERE `js_id`='$guid'");
+          $t = $_POST['guid'];
+	
+	     $res=$db->query("SELECT max(jbaq_id) FROM `jobseeker_ads_qualification`  WHERE `js_id`= '$t' ");
+  		$result = $res->fetch();
+  		$dt=$result[0];
+	  // print_r($count); exit;  
+	   
+            if ($skill =='') {
+                
+             
+             //echo ("UPDATE  `jobseeker_ads_qualification` SET  `txtEducation`='$skill[$i]',`specialisation`='$skill6[$i]',`marks`='$skill7[$i]',`university`='$skill8[$i]', `yearpassing`='$skill9[$i]'  WHERE `js_id`='$guid'");exit;
+             $sth = $db->query ("UPDATE  `jobseeker_ads_qualification` SET  `marks`='$skill7[$i]',`university`='$skill8[$i]', `yearpassing`='$skill9[$i]'  WHERE `guid`='$gu_id[$i]'");
+           
+         
+
+            } else {
+           
+           //echo ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$dt','$guid','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");exit;  
+                
+            $sth = $db->query ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$dt','$guid','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");
+           
+            }
+
 
          }
-
-
-
-
-    //update variant
+    
+    
 	if($sth > 0) {
 	$post_msg = '<h4 style="color: green;">Details Successfully Updated</h4>';	
 	header('location:'.URL.'jobseeker_ads.php?post_msg='.$post_msg);
@@ -95,8 +119,6 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
     <![endif]-->
 
 </head>
-
-
 <body>
 <div id="wrapper">
   <div id="main-container"> 
@@ -214,7 +236,6 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
               <div class="portlet-body col-sm-12">
                 <?php $psth = $db->query ("SELECT * FROM `jobseeker_ads` WHERE `guid`='$guid'");
 				      $row = $psth->fetch();
-             // print_r($row);exit;
 				  ?>
                 <form role="form" method="post" class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                     <div class="form-group">
@@ -322,24 +343,24 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                         <input type="email" class="form-control email required" name="txtEmail" value="<?php echo $row['txtEmail']?>" placeholder="Email-id" />
                       </div>
                     </div>
-                    <!-- <div class="form-group">
-                      <label  class="col-sm-4  control-label">
-                      Educational Information</label>
-                      <div class="col-sm-6">
-                        <input type="text" class="form-control required" name="txtEducation" value="<?php echo $row['txtEducation']?>" placeholder="Educational Information" />
-                      </div>
-                    </div> -->
-
+                    <!--<div class="form-group">-->
+                    <!--  <label  class="col-sm-4  control-label">-->
+                    <!--  Educational Information</label>-->
+                    <!--  <div class="col-sm-6">-->
+                    <!--    <input type="text" class="form-control required" name="txtEducation" value="<?php echo $row['txtEducation']?>" placeholder="Educational Information" />-->
+                    <!--  </div>-->
+                    <!--</div>-->
                     <div class="form-group">
                       <label  class="col-sm-4  control-label">
-                       Skills </label>
+                       Skills</label>
                       <div class="col-sm-6">
-                        <input type="text" class="form-control required"  readonly value="<?php echo $row['txtSkills']?>" placeholder="Educational Information" />
+                        <input type="text" class="form-control required"  readonly value="<?php echo $row['txtSkills']?>" placeholder="Enter Skills" />
+                        <p style="color:red">Note: Please select all skills including updated once again</p>
                       </div>
                     </div>
                     <div class="form-group">
                       <label  class="col-sm-4  control-label">
-                      Updated Skills </label>
+                      Enter Skills</label>
                       <div class="col-sm-6">
                       <select multiple="multiple" name="txtSkills[]" class="SlectBox form-control required">
                 <?php $citt = $db->query("SELECT * FROM `skills` $srr ORDER BY `name` ASC");
@@ -347,12 +368,8 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                 <option value="<?php echo $ciroww['name'] ?>" ><?php echo $ciroww['name'] ?></option>
                 <?php } ?>
               </select>
-                  </div>
+               </div>
                     </div>
-
-                   
-
-                    
                     <div class="form-group">
                       <label  class="col-sm-4  control-label">
                       Expected Salary</label>
@@ -382,122 +399,108 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                       </div>
                     </div>
 
-                    <div class="col-sm-12">
-                    <tr>
-      <td >
-      <p><strong>Educational Information:</strong></p><br>
-      <table width="100%" border="1" cellspacing="0" cellpadding="0" class="table table-bordered" style="margin-bottom:0px">
-  <tbody>
-    <tr>
-      <td width="5%"><strong>Degree</strong></td>
-     
-      <td width="5%"><strong>Specialization</strong></td>
-      <td width="5%"><strong>% Marks</strong></td>
-      <td width="5%"><strong>University</strong></td> 
-      <td width="5%"><strong>Year of Passing</strong></td>
-    </tr>
 
 
 
-    <?php 
+
+
+
+
+
+
+        
+        
+                 
+            <div class="container">
+            <p><strong>Educational Information:</strong></p><br>
+						<table class="table" id="dynamic_field">
+           
+			<tr>
+              <?php 
 			 $m = $db->query("SELECT * FROM  `jobseeker_ads_qualification` WHERE  js_id='$guid'"); 
-			  while($z = $m->fetch()){
-
+            while($z = $m->fetch()){
+      
           $tth = $db->query ("SELECT * FROM `qualification` WHERE `guid` = $z[3]");
           $trow = $tth-> fetch(); 
           $tthd = $db->query ("SELECT * FROM `specialisation` WHERE `guid` = $z[4]");
           $tsugu = $tthd-> fetch(); 
-
-
-			?>
-    <tr>
-   <?php  
- ?>
-      <td><p><?php echo $trow['name'];?></p></td>
-      
-      <td>
-      <p><?php echo $tsugu['name'];?><br></p>
-      
-      </td>
-	  <td>
-      <p><?php echo $z['marks']?><br></p>
-      
-      </td>
-      <td>
-      <p><?php echo $z['university']?></p>
-      </td>
-      <td>
-      <p><?php echo $z['yearpassing']?></p>
-      </td>
-    </tr>
-    <?php } ?>
-  </tbody>
-</table>
-</td>
-</tr><br>
-        </div>
-
-                    
+          //print_r($tsugu);exit;
         
-                 
-                 
-                      
-                         
-                    
-            <div class="form-group col-sm-12">
-            <p><strong>Updated Educational Information:</strong></p><br>
-						<table class="table" id="dynamic_field">
-							<tr>
-							<div class="col-sm-3">
+          
+          ?>
+
+              <div class="row">
+							<div class="col">
               <td> 
                 <label  class="control-label">Qualification</label>
-                  <select class="form-control required super" name="txtEducation[]" id="cid" >
+                  <select class="form-control required super"  id="cid" readonly >
                   <option value="">Select Qualifications</option>
-                  <?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc");
-                      while($row = $sth->fetch()) {
-                      echo "<option value='".$row[0]."'>".$row['name']."</option>";
-                      } ?>
+                  <?php $jth = $db->query("SELECT * FROM `qualification` ORDER BY `name` ASC");
+                  foreach($jth as $jrow){
+                  echo '<option '; if($jrow['guid']==$z[3]){ echo "selected=''"; }echo '>'.$jrow['name'].'</option>';
+                  }
+                  ?>
                   </select>
-                </td>
+                  </td>
+
               </div>
-							<div class="col-sm-3">
+                <div class="col">
                 <td>
                   <label  class="control-label">Specialisation</label>
-                  <select class="form-control required area" name="specialisation[]" id="aid" required>
+                  <!-- <select class="form-control required area" name="specialisation[]" id="aid" required>
                     <option value="">Select Specialisation</option>
-                  </select>
+                   
+                  </select> -->
+                  <input type="text" class="form-control required" readonly  value="<?php echo $tsugu[2];?>" placeholder="Specialisation" autocomplete="off"/>
                 </td>
               </div>
-							<div class="col-sm-1">
+							<div class="col">
               <td><label  class="control-label">% Marks</label>
-              <input type="number" class="form-control required"  name="marks[]" placeholder="% Marks" autocomplete="off"/>
+              <input type="number" class="form-control required"  name="marks[]" value="<?php echo $z['marks']?>" placeholder="% Marks" autocomplete="off"/>
               </td>
               </div>
-							<div class="col-sm-2">
+							<div class="col">
               <td> 
               <label  class="control-label">University</label>
-              <input type="text" class="form-control required"  name="university[]" placeholder="University Name" autocomplete="off"/>
+              <input type="text" class="form-control required"  name="university[]" value="<?php echo $z['university']?>" placeholder="University Name" autocomplete="off"/>
               </td>
               </div>
-							<div class="col-sm-1">
+			        <div class="col">
               <td>
               <label  class="control-label">Year of Passing</label>
-              <input type="text" class="form-control required" maxlength="4"  name="yearpassing[]" placeholder="Year of Passing" autocomplete="off"/>
+              <input type="text" class="form-control required" maxlength="4"  name="yearpassing[]" value="<?php echo $z['yearpassing']?>" placeholder="Year of Passing" autocomplete="off"/>
+                 <input type="hidden" class="form-control required"  name="guu_id[]" value="<?php echo $z['guid']?>"/>
               </td>
-              </div>
-              <div class="col-sm-1">
-               <td> 
               
-                <button type="button" name="add" id="add" class="btn btn-success"><span>&#43;</span></button>
-               </td>
               </div>
+              
+                </div>
 							</tr>
+              <?php } ?>
 						</table>
             </div>
-
-
+            <div class="col">
+               <td> 
+             
+          
+               </td>
+              </div>
+      
+             
+        
+        
+        
+        
+        
+        
 
                   <div class="clearfix"></div><br />
+                  
+                  
+                  
+                  
+                  
+                  
                   <div class="col-sm-12">
                         <div class="form-group col-sm-4">
                           <label>Upload Photo</label>
@@ -520,10 +523,15 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                           <a href="../adminupload/<?php echo $row['image3'] ?>" target="_blank" >View</a>
                           <?php } ?>
                         </div>
-
-
-                        
                   </div>
+                  
+                    
+      
+
+                  
+                  
+                  
+                  
                  <div class="clearfix"></div>
                   <div class="form-actions">
                     <input type="hidden" name="guid" value="<?php echo $guid; ?>"/>
@@ -699,19 +707,14 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
 			});
 	</script> 
 	
-
-
-
-
-
-<script>
+	<script>
 
 
 $('.super').change(function(){
     var cid= $(this).val();
     $.ajax({
     type:"post",
-    url:"http://localhost/adschronicle//ajaxReq2.php",
+    url:"https://adschronicle.com//ajaxReq2.php",
     data:"cid="+cid+"&action=fetchexp1",
      success:function(response){
       $('.area').html(response);
@@ -731,7 +734,7 @@ $(document).ready(function(){
    //console.log(cid);
     $.ajax({
     type:"post",
-    url:"http://localhost/adschronicle//ajaxReq2.php",
+    url:"https://adschronicle.com//ajaxReq2.php",
     data:"cid="+cid+"&action=fetchexp1",
      success:function(response){
       $('.spec').html(response);
@@ -750,8 +753,14 @@ $(document).ready(function(){
 });
 
 </script>
-
-
+<script type="text/javascript">
+function delete1(){
+  if(window.confirm("Confirm delete"))  {
+   return true;
+  } else
+   return false;
+}
+</script> 
 <script src="https://adschronicle.com/jquery.sumoselect.js"></script>
 <link href="https://adschronicle.com/sumoselect.css" rel="stylesheet" />
     <script type="text/javascript">
@@ -771,15 +780,6 @@ $(document).ready(function(){
       color: #F60;
       }
     </style>
-<script type="text/javascript">
-function delete1(){
-  if(window.confirm("Confirm delete"))  {
-   return true;
-  } else
-   return false;
-}
-</script> 
-
 
 <script type="text/javascript">
 function checkIt(evt) {

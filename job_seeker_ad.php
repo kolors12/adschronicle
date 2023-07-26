@@ -414,30 +414,29 @@
                 <p class="help-block"><small>(Maximum video size 20MB only)</small></p>
               </div>
             </div>
-			<div class="form-group">
+			      <div class="form-group">
               <label  class="col-sm-3 control-label"> Enter Captcha Code</label>
               <div class="col-sm-6">
-                 <div class="form-group">
-			 
-			  <div class="">
+              <div class="form-group">
+			         <div class="">
                <div class="col-md-6">
                 <div style="height: 34px; background: #F2F2F2;padding-top: 6px; text-align:center" >
-				<?php session_start();$_SESSION['vcode']=rand(999,9999);echo $_SESSION['vcode'];?>
-				<input type="hidden" name="captcha" id="captcha" value="<?php echo $_SESSION['vcode']; ?>">
-				</div> 
+				        <?php session_start();$_SESSION['vcode']=rand(999,9999);echo $_SESSION['vcode'];?>
+				        <input type="hidden" name="captcha" id="captcha" value="<?php echo $_SESSION['vcode']; ?>">
+				      </div> 
               </div>
               <div class="col-md-6">
-              <input type="text" name="textcaptcha" equalTo="#captcha" minlength="4" maxlength="4" placeholder="Captcha" class="form-control number required" />
+              <input type="text" name="textcaptcha" equalTo="#captcha" minlength="4" maxlength="4"   placeholder="Captcha" class="form-control number required" />
               </div> 
               </div>
-			  </div>
+			     </div>
               </div>
             </div>
 			
 			
             <div class="form-group">
               <div class="col-sm-offset-6 col-sm-6">
-                <button type="submit" name="submit" value="submitJobSeeker" class="btn btn-info">Submit</button>
+                <button type="submit" name="submit" value="submit" class="btn btn-info">Submit</button>
               </div>
             </div>
           </form>

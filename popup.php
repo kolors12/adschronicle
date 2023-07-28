@@ -10,7 +10,7 @@ if(isset($_POST) && $_POST['submit']=='submit'){
 	//$txtTo = $_POST['to_address'];
 
 
-        $txtFrom = $_POST['tform'];
+  $txtFrom = $_POST['tform'];
 	$txtSubject = $_POST['interview'];
 	$txtMessage = $_POST['message'];;
 	$mobile = $_POST['mobile'];;

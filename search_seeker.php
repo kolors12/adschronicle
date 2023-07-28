@@ -109,19 +109,36 @@
             foreach($serth as $lrow){
             $mth = $db->query("SELECT * FROM  `jobseeker_ads` WHERE `status`='Active' AND `txtCity` LIKE '%".$_COOKIE['areaname']."%' AND `txtJobCategory` = '".$lrow[0]."'  $srr ORDER BY `guid` DESC");
             if($mth->rowCount() > 0){
+
+
+            
+            
             ?>
           <div class="panel panel-default">
             <div class="panel-heading"><?php echo ucfirst($lrow[0])?></div>
             <div class="panel-body" id="ads_serct">
-              <?php foreach($mth as $row){ ?>
+              <?php foreach($mth as $row){ 
+                
+                
+              $de= $row['pid'];
+              $rest=$db->query("SELECT *  FROM `jobseeker_ads_qualification` WHERE `jbaq_id`='$de'");
+              $resu = $rest->fetch();
+              $ty= $resu['txtEducation'];
+
+
+              $tth = $db->query ("SELECT * FROM `qualification` WHERE `guid` = '$ty'");
+              $trow = $tth-> fetch(); 
+                //print_r($trow['name']);exit;
+                ?>
               <div class="row" style="border:1px #eee solid; margin:5px">
                 <div class="col-md-2" align="center">
                   <img src="adminupload/<?php echo $row['image1']?>" style="height:170px; width:100%; padding:3px" alt=""/> 
                   <p><strong><?php echo $row['productid']?></strong></p>
                 </div>
+               
                 <div class="col-md-9">
                   <div style="padding-top:30px">
-                    <p class="pull-left"><?php echo $row['txtName']?> | <?php echo $row['txtEducation']?>  | Exp: <?php echo $row['txtJobExp']?> | <?php echo $row['txtSkills']?> </p>
+                    <p class="pull-left"><?php echo $row['txtName']?> | <?php echo $trow['name'];?>  | Exp: <?php echo $row['txtJobExp']?> | <?php echo $row['txtSkills']?> </p>
                     
                     <div class="clearfix"></div>
                     <div style="border-bottom:1px #ddd solid;  margin-bottom:5px"></div>

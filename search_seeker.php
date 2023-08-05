@@ -124,8 +124,6 @@
               $rest=$db->query("SELECT *  FROM `jobseeker_ads_qualification` WHERE `jbaq_id`='$de'");
               $resu = $rest->fetch();
               $ty= $resu['txtEducation'];
-
-
               $tth = $db->query ("SELECT * FROM `qualification` WHERE `guid` = '$ty'");
               $trow = $tth-> fetch(); 
                 //print_r($trow['name']);exit;

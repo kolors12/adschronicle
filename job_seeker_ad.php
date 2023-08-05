@@ -6,8 +6,8 @@
      //print_r ($_POST["txtEducation"]); exit;
             //stripslashes($_POST);
             
-            
-               $choice=implode(',',$_POST['txtSkills']);
+             $choice=implode('&nbsp;|&nbsp;',$_POST['txtSkills']);
+             
             $tmpFilePath1 = $_FILES['image1']['tmp_name'];
             if ($tmpFilePath1 != ""){
               $im_name1 = time().$_FILES['image1']['name'];
@@ -58,19 +58,21 @@
         
    
     // echo "$dt";exit;
-        for($i=0; $i<$count; $i++)
-        {
-         
-
-          //echo "INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$pid','$dt','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')";exit;
-          $sth = $db->query ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$pid','$dt','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");
-	     
-         }
-  		
+       
   		
          //echo "INSERT INTO `jobseeker_ads`( `productid`, `pid`, `txtJobCategory`, `txtJobExp`, `txtJobStatus`, `txtName`, `txtDob`, `txtMStatus`, `txtAddress`,`txtCity`,`txtLocation`, `txtMobile`, `txtAMobile`, `txtEmail`, `txtSkills`, `txtExpSalary`, `txtDesiredLocation`, `txtAddinformation`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$txtJobCategory', '$txtJobExp', '$txtJobStatus', '$txtName', '$txtDob', '$txtMStatus', '$txtAddress','$txtCity', '$txtLocation', '$txtMobile', '$txtAMobile', '$txtEmail', '$choice', '$txtExpSalary', '$txtDesiredLocation', '$txtAddinformation', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )";exit;
   	    $sth = $db->query ("INSERT INTO jobseeker_ads ( `productid`, `pid`, `txtJobCategory`, `txtJobExp`, `txtJobStatus`, `txtName`, `txtDob`, `txtMStatus`, `txtAddress`,`txtCity`,`txtLocation`, `txtMobile`, `txtAMobile`, `txtEmail`, `txtSkills`, `txtExpSalary`, `txtDesiredLocation`, `txtAddinformation`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$txtJobCategory', '$txtJobExp', '$txtJobStatus', '$txtName', '$txtDob', '$txtMStatus', '$txtAddress','$txtCity', '$txtLocation', '$txtMobile', '$txtAMobile', '$txtEmail', '$choice', '$txtExpSalary', '$txtDesiredLocation', '$txtAddinformation', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )");
   		$insid = $db->lastInsertId();
+  		
+  		 for($i=0; $i<$count; $i++)
+        {
+         
+
+          //echo "INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$pid','$dt','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')";exit;
+          $sth = $db->query ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$pid','$insid','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");
+	     
+         }
+  		
   		
   		if($sth > 0) {
   			//$post_msg = '<h4 style="color: green;">Job Seeker Ad Successfully Submitted</h4>';	
@@ -254,11 +256,11 @@
                 <textarea class="form-control required"  maxlength="100" name="txtAddress" placeholder="Address with Pin" rows="1"></textarea>
               </div>
             
-              <div class="col-sm-2">
+              <div class="col-sm-3">
               <label  class="control-label">City</label>
               <input type="text"  readonly class="form-control " name="txtCity"  value="<?php echo $_COOKIE['areaname']?>" placeholder="City" />
               </div>
-              <div class="col-sm-2">
+              <div class="col-sm-3">
               <label  class="control-label">Locality</label>
               <select class="form-control " name="txtLocation"  >
               <option value="" selected="">Select Residence</option>
@@ -268,17 +270,17 @@
               }
               ?>
               </select>
-              </div>
+              
+            </div>
+         
+                  
+              <div class="form-group col-sm-12">
+</div>
               <div class="col-sm-2">
               <label  class="control-label">Phone No. 1</label>
                 <input type="text" class="form-control number required" minlength="10" maxlength="10"  name="txtMobile" id="txtMobile" autocomplete="off" placeholder="Phone No. 1" />
                 <span id="span4"></span>
               </div>
-            </div>
-         
-                  
-              <div class="form-group col-sm-12">
-
             <div class="col-sm-2">
             <label  class="control-label otp-block">Enter OTP</label>
                    <div class="clearfix"><span class="success-text"></span></div>
@@ -298,7 +300,7 @@
               </div>
 
              
-              <div class="col-sm-2">
+              <div class="col-sm-3">
               <label  class="control-label">
               Desired Location</label>
                 <select class="form-control required" name="txtDesiredLocation">
@@ -309,12 +311,7 @@
                     }
                    ?>
                 </select>
-              </div>
-             
-              <div class="col-sm-3">
-              <label  class="control-label">Additional Information</label>
-                <textarea class="form-control" name="txtAddinformation" placeholder="Additional Information you wish to provide" rows="1"></textarea>
-              </div>
+              
             </div>
               <input type="hidden" name="adtype"  value="JOB SEEKER AD" />
             <!-- <div class="form-group">
@@ -329,7 +326,7 @@
 							<tr>
 							<div class="col-sm-3">
               <td> 
-                <label  class="control-label">Qualification</label>
+                <label  class="control-label">Degree</label>
                   <select class="form-control required super" name="txtEducation[]" id="cid" >
                   <option value="">Select Qualifications</option>
                   <?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc");
@@ -348,7 +345,7 @@
                 </td>
               </div>
 							<div class="col-sm-1">
-              <td><label  class="control-label">% Marks</label>
+              <td><label  class="control-label">Marks</label>
               <input type="number" class="form-control required"  name="marks[]" placeholder="% Marks" autocomplete="off"/>
               </td>
               </div>
@@ -360,7 +357,7 @@
               </div>
 							<div class="col-sm-1">
               <td>
-              <label  class="control-label">Year of Passing</label>
+              <label  class="control-label">Passed</label>
               <input type="text" class="form-control required" maxlength="4"  name="yearpassing[]" placeholder="Year of Passing" autocomplete="off"/>
               </td>
               </div>
@@ -378,8 +375,8 @@
             <div class="form-group col-sm-12">
              
               <div class="col-sm-3">
-              <label  class="control-label">Technical Skills</label>
-              <select multiple="multiple" name="txtSkills[]" class="SlectBox form-control required">
+              <label  class="control-label required">Skills</label>
+              <select class="SlectBox form-control" multiple="multiple required" name="txtSkills[]" >
                 <?php $citt = $db->query("SELECT * FROM `skills` $srr ORDER BY `name` ASC");
                   while($ciroww = $citt->fetch()){ ?>
                 <option value="<?php echo $ciroww['name'] ?>" ><?php echo $ciroww['name'] ?></option>
@@ -392,29 +389,33 @@
               <label  class="control-label">Expected Salary</label>
                 <input type="text" class="form-control required"  name="txtExpSalary" autocomplete="off" placeholder="Expected Salary" />
               </div>
-
-            
+            <div class="col-sm-3">
+              <label  class="control-label">Additional Information</label>
+                <textarea class="form-control required" name="txtAddinformation" placeholder="Additional Information you wish to provide" rows="1"></textarea>
+              </div>
               <div class="col-sm-3">
               <label  class="control-label">Upload Recent Photo</label>
-                <input type="file" class="required form-control" name="image1" />
+                <input type="file" class="form-control required" name="image1" />
               </div>
-              
+            </div>
+             
+              <div class="form-group col-sm-12">
               <div class="col-sm-3">
               <label  class="control-label">Upload Resume in doc, pdf</label>
                 <input type="file" class="form-control" name="image2" />
               </div>
-            </div>
            
            
-            
-            <div class="form-group col-sm-12">
-              <label  class="col-sm-3 control-label">Upload Video Resume</label>
-              <div class="col-sm-6">
+           
+              
+              <div class="col-sm-3">
+                  <label  class="control-label">Upload Video Resume</label>
                 <input type="file" class="form-control" name="image3" />
                 <p class="help-block"><small>(Maximum video size 20MB only)</small></p>
               </div>
+               </div>
             </div>
-			      <div class="form-group">
+		<div class="form-group">
               <label  class="col-sm-3 control-label"> Enter Captcha Code</label>
               <div class="col-sm-6">
               <div class="form-group">
@@ -433,10 +434,9 @@
               </div>
             </div>
 			
-			
             <div class="form-group">
               <div class="col-sm-offset-6 col-sm-6">
-                <button type="submit" name="submit" value="submit" class="btn btn-info">Submit</button>
+                <button type="submit" name="submit" value="submitJobSeeker" class="btn btn-info">Submit</button>
               </div>
             </div>
           </form>
@@ -526,7 +526,7 @@
                         //"$("#remail").prop('readonly', true);
                         $("#span4").html('<i class="fa fa-check-circle-o"></i> OTP sent to &nbsp'+userphone+'.<br/>');
                         $("#span4").addClass("text-success");
-                        $(".success-text").html('<i class="fa fa-check-circle-o"></i> OTP sent to &nbsp'+userphone+'.<br/>');
+                        $(".success-text").html('<i class="fa fa-check-circle-o"></i>');
                         $(".success-text").addClass("text-success");
     					return true;   
     				}
@@ -593,7 +593,7 @@
                    	if(data == 'sent'){
                         $(".submit-button").addClass("disablededit");
                    	    $("#txtOtp").val('');
-                        $(".success-text").html('<i class="fa fa-check-circle-o"></i> OTP sent to &nbsp'+userphone+'.<br/>');
+                        $(".success-text").html('<i class="fa fa-check-circle-o"></i>OTP sent to &nbsp'+userphone+'.<br/>');
                         $(".success-text").addClass("text-success");
     					return true;
     				}
@@ -609,18 +609,19 @@
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td> <select class="form-control required quali" name="txtEducation[]" id="cid" ><option value="">Select Qualifications</option><?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc"); while($row = $sth->fetch()) { echo '<option value='.$row[0].'>'.$row['name'].'</option>'; } ?></select></td><td> <select class="form-control required spec" name="specialisation[]" id="aid" required><option value="">Select Specialisation</option></select></td> <td><input type="number" name="marks[]" placeholder="% Marks" class="form-control name_list" /></td><td><input type="text" name="university[]" placeholder="University Name" class="form-control name_list" /></td><td><input type="text" maxlength="4" name="yearpassing[]" placeholder="Year of Passing" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td> <select class="form-control required quali" name="txtEducation[]" id="quali_'+i+'" ><option value="">Select Qualifications</option><?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc"); while($row = $sth->fetch()) { echo '<option value='.$row[0].'>'.$row['name'].'</option>'; } ?></select></td><td> <select class="form-control required spec" name="specialisation[]" id="spec_'+i+'" required><option value="">Select Specialisation</option></select></td> <td><input type="number" name="marks[]" placeholder="% Marks" class="form-control name_list" /></td><td><input type="text" name="university[]" placeholder="University Name" class="form-control name_list" /></td><td><input type="text" maxlength="4" name="yearpassing[]" placeholder="Year of Passing" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
 	
-	    $('.quali').change(function(){
+	$('#quali_'+i).change(function(){
      // alert('hi');
-    var cid= $(this).val();
+    var cid = $(this).val();
    //console.log(cid);
     $.ajax({
     type:"post",
     url:"ajaxReq2.php",
     data:"cid="+cid+"&action=fetchexp1",
      success:function(response){
-      $('.spec').html(response);
+         //console.log(i);
+      $('#spec_'+i).html(response);
     return true;
     }
     });
@@ -634,6 +635,10 @@
 		$('#row'+button_id+'').remove();
 	});
 });
+
+
+
+  
 
   </script> 
 </html>

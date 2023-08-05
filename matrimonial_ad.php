@@ -5,7 +5,7 @@
   extract($_POST);
   $date = date("Y-m-d");
   if(isset($_POST) && $_POST['submit'] == 'SubmitMatrimonal') {
-     //echo print_r($_POST); exit;
+     echo print_r($_POST); exit;
       stripslashes($_POST);
             $tmpFilePath1 = $_FILES['image1']['tmp_name'];
             if ($tmpFilePath1 != ""){
@@ -45,19 +45,19 @@
   		$res;
   		$res=$res+1;
   		$val= 'ADM-'.$res;
-        $pid = md5($txtName."/".$gender."/".time());
+      $pid = md5($txtName."/".$gender."/".time());
         
 		
-//echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`, `txtQualification`, `txtOccupation`, `txtWorkPlace`, `txtMonthIncome`, `txtBirthCity`, `txtAge`, `txtHeight`, `txtComplexion`, `txtLanguages`, `txtReligion`, `txtSect`, `txtMstatus`, `txtChildren`, `txtFather`, `txtFOccupation`, `txtFPlaceWork`, `txtGPFather`, `txtGPOccupation`, `txtGMFather`, `txtGMOccupation`, `txtSiblingsInformation`, `txtAboutFamily`, `txtAddress`, `txtCity`, `txtLocality`, `txtMobile`, `txtAMobile`,`txtEmail`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$gender', '$txtName', '$txtQualification', '$txtOccupation', '$txtWorkPlace', '$txtMonthIncome', '$txtBirthCity', '$txtAge', '$txtHeight', '$txtComplexion', '$txtLanguages', '$txtReligion', '$txtSect', '$txtMstatus', '$txtChildren', '$txtFather', '$txtFOccupation', '$txtFPlaceWork', '$txtGPFather', '$txtGPOccupation', '$txtGMFather', '$txtGMOccupation', '$txtSiblingsInformation', '$txtAboutFamily', '$txtAddress', '$txtCity', '$txtLocality', '$txtMobile', '$txtAMobile','$txtEmail', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )";exit;
+echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`, `txtQualification`, `txtOccupation`, `txtWorkPlace`, `txtMonthIncome`, `txtBirthCity`, `txtAge`, `txtHeight`, `txtComplexion`, `txtLanguages`, `txtReligion`, `txtSect`, `txtMstatus`, `txtChildren`, `txtFather`, `txtFOccupation`, `txtFPlaceWork`, `txtGPFather`, `txtGPOccupation`, `txtGMFather`, `txtGMOccupation`, `txtSiblingsInformation`, `txtAboutFamily`, `txtAddress`, `txtCity`, `txtLocality`, `txtMobile`, `txtAMobile`,`txtEmail`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$gender', '$txtName', '$txtQualification', '$txtOccupation', '$txtWorkPlace', '$txtMonthIncome', '$txtBirthCity', '$txtAge', '$txtHeight', '$txtComplexion', '$txtLanguages', '$txtReligion', '$txtSect', '$txtMstatus', '$txtChildren', '$txtFather', '$txtFOccupation', '$txtFPlaceWork', '$txtGPFather', '$txtGPOccupation', '$txtGMFather', '$txtGMOccupation', '$txtSiblingsInformation', '$txtAboutFamily', '$txtAddress', '$txtCity', '$txtLocality', '$txtMobile', '$txtAMobile','$txtEmail', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )";exit;
   	    $sth = $db->query ("INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`, `txtQualification`, `txtOccupation`, `txtWorkPlace`, `txtMonthIncome`, `txtBirthCity`, `txtAge`, `txtHeight`, `txtComplexion`, `txtLanguages`, `txtReligion`, `txtSect`, `txtMstatus`, `txtChildren`, `txtFather`, `txtFOccupation`, `txtFPlaceWork`, `txtGPFather`, `txtGPOccupation`, `txtGMFather`, `txtGMOccupation`, `txtSiblingsInformation`, `txtAboutFamily`, `txtAddress`, `txtCity`, `txtLocality`, `txtMobile`, `txtAMobile`,`txtEmail`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$gender', '$txtName', '$txtQualification', '$txtOccupation', '$txtWorkPlace', '$txtMonthIncome', '$txtBirthCity', '$txtAge', '$txtHeight', '$txtComplexion', '$txtLanguages', '$txtReligion', '$txtSect', '$txtMstatus', '$txtChildren', '$txtFather', '$txtFOccupation', '$txtFPlaceWork', '$txtGPFather', '$txtGPOccupation', '$txtGMFather', '$txtGMOccupation', '$txtSiblingsInformation', '$txtAboutFamily', '$txtAddress', '$txtCity', '$txtLocality', '$txtMobile', '$txtAMobile','$txtEmail', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )");
   	$insid = $db->lastInsertId(); 
   		if($sth > 0) {
   			//$post_msg = '<h4 style="color: green;">Matrimonial Ad Successfully Submitted</h4>';	
   			//header('location:matrimonial_ad.php?post_msg='.$post_msg); ?>
-                             <script>
-                             alert("Matrimonial Ad Successfully Submitted");
-                             window.location="add-packages.php?matrimonialid=<?php echo $insid ?>";
-                            </script>
+      <script>
+      alert("Matrimonial Ad Successfully Submitted");
+      window.location="add-packages.php?matrimonialid=<?php echo $insid ?>";
+      </script>
 
   		<?php } else { 
   			$post_msg = '<h4 style="color: red;">Please try Again</h4>';	
@@ -126,6 +126,22 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
+                      <select class="form-control required" name="gender" type="text" id="dropBox" onchange="changeSelect()">
+                      <option value="1">Select</option>
+                      <option value="BrideGroom">BrideGroom</option>
+                      <option value="Bride">Bride</option>
+                     
+                      </select>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <!-- <div class="col-md-3">
+                    <div class="form-group">
+                      <div class="col-sm-12">
                         <select class="form-control required" name="gender">
                           <option value="">Select</option>
                           <option value="BrideGroom">BrideGroom</option>
@@ -133,15 +149,25 @@
                         </select>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
+
+                  
                   <div class="clearfix"></div>
                   <div class="col-md-3">
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                     
+                      <div id="divText"><input type="text" class="form-control required" minlength="3"  placeholder="Bride's/Groom's Full Name"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
                         <input type="text" class="form-control required" minlength="3" name="txtName" placeholder="Bride's/Groom's Full Name">
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
@@ -367,7 +393,7 @@
                          <option>Self Employed / Bussiness</option>
                           <option>Government / Private Job</option>
                           <option>Retired</option>
-	 <option>Land Lord</option>
+	                <option>Land Lord</option>
                           <option>Other</option>
                         </select>
                       </div>
@@ -377,11 +403,42 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <div class="col-md-12">
-                        <label ><strong>About Brother and Sisters (Enter here number of brothers and sisters, their qualifications, occupations and place of work)</strong></label>
-                        <textarea class="form-control required" name="txtSiblingsInformation" maxlength="500"  placeholder="Enter here number of brothers and sisters, their qualifications, occupations and place of work" rows="3"></textarea>
+                        <label ><strong>About Brother and Sisters (Enter here number of brothers and sisters, their Name, Qualifications, occupations,Status and place of work)</strong></label>
+                      
+                    
+
+                   <div class="">
+                      <label  class="col-sm-2  control-label">
+                      No.of Brothers</label>
+                      <div class="col-sm-3">
+                      <input type="number"  id="Nofbro" name="numberofbrothers" class="form-control required" placeholder="No.of Brothers" />
+                      </div>
+                    </div>
+                    
+                      <label  class="col-sm-2  control-label">
+                      No.of Sisters</label>
+                      <div class="col-sm-3">
+                      <input type="number"   id="NofSis" name="numberofsis" class="form-control required"  placeholder="No.of Sisters" />
+                      </div>
+                    
+                     
+                      <div class="col-sm-2">
+                      <button type="button" value="CREATE" id="btnNoOfRec" class="btn btn-primary pull-right">Create</button> 
+                      
+                      </div><br>
+                      <div class="col-sm-1">
+                      
+                      
+                      </div><br>
+
+
+                      <div id="AddControll"></div> 
                       </div>
                     </div>
                   </div>
+                 
+              
+ 
                 <div class="clearfix"></div>
                   <div class="col-md-12">
                     <div class="form-group">
@@ -429,7 +486,7 @@
                  - <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
-                        <input type="text"  readonly class="form-control required" name="txtCity"  value=<?php echo $_COOKIE['areaname']?> placeholder="City" />
+                        <input type="text"  readonly class="form-control required" name="txtCity"  value="<?php echo $_COOKIE['areaname']?>" placeholder="City" />
                       </div>
                     </div>
                   </div>
@@ -571,5 +628,94 @@ document.getElementById("wp").style.display = "block";
 
                }
     });
+
+
+    function changeSelect() {
+    if (document.getElementById("dropBox").value == "1") {
+        document.getElementById("divText").innerHTML = "<input type='text' class='form-control required' minlength='3'  placeholder='Bride's/Groom's Full Name'>";
+    } else if (document.getElementById("dropBox").value == "BrideGroom") {
+        document.getElementById("divText").innerHTML = " <input type='text' class='form-control required' minlength='3' name='txtName' placeholder='BrideGroom Full Name'>";
+    } else if (document.getElementById("dropBox").value == "Bride") {
+        document.getElementById("divText").innerHTML = " <input type='text' class='form-control required' minlength='3' name='txtName' placeholder='Grooms Full Name'>";
+    } 
+}
   </script> 
+
+
+
+
+<script>
+$(document).ready(function () {
+      load();
+   });
+   
+   function load() {
+  
+   $("#btnNoOfRec").click(function(){
+   $("#AddControll").empty();
+  
+   var NofSis = parseInt( document.getElementById("NofSis").value );
+   var Nofbro = parseInt( document.getElementById("Nofbro").value );
+   var NoOfRec = NofSis+Nofbro;
+ 
+ 
+   if(NoOfRec > 0){
+     createControll(NoOfRec);
+   }
+   
+   });
+ }
+   
+ function createControll(NoOfRec){ 
+  
+  // alert(optAry.length);
+   var th = "";
+   var td = "";
+   var tbl = ""; 
+   tbl = "<table class='table table-bordered table-hover '>"+
+			"<tr>"+
+    			"<th width='5%'>Name</th>"+
+    			"<th width='5%'>Qualification </th>"+
+          "<th width='5%'>Occupation</th>"+
+          "<th width='5%'>Status</th>"+
+          "<th width='5%'>Plce of Work</th>";
+			
+    		tbl += th;
+    		
+			"</tr>"; 
+			for(i = 1; i <= NoOfRec; i++){ 
+			tbl += "<tr>"+
+			"<td>"+ "<input type='text' class=' table form-control col-3 required' name='name[]'  placeholder='Enter Name'/>" + "</td>"+
+			"<td>"+"<input type='text' class=' table form-control col-3 required' name='qualification[]'  placeholder='Enter Qualification'/>"+"</td>"+
+      "<td>"+
+            '<select  class="form-control required" name="occupation[]" id="opt-1">'+
+            '<option value="">Select Occupation</option>'+
+            '<option value="Government Employee">Government Employee</option>'+
+            '<option value="Private Employee">Private Employee</option>'+
+            '<option value="Self Business">Self Business</option>'+
+            '<option value="Student">Student</option>'+
+            '</select>'+
+			"</td>"+  
+      "<td>"+
+            '<select  class="form-control required" name="status[]" id="opt-1">'+
+            '<option value="">Select Status</option>'+
+            '<option value="Married">Married</option>'+
+            '<option value="Unmarried">Unmarried</option>'+
+            '</select>'+
+			"</td>"+  
+      "<td>"+"<input type='text' class=' table form-control col-3 required' name='placeofwork[]'  placeholder='Enter Place of Work'/>"+"</td>";
+			tbl += td;
+			
+		
+			tbl += "</tr>";
+
+			}
+			tbl += "</table>";
+			 $("#AddControll").append(tbl);
+			} 
+function removeRow(i) { 
+    jQuery('#NoOfRec tr'+i).remove();
+}
+   
+</script>
 </html>

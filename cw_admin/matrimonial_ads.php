@@ -12,7 +12,7 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
     	$file=$db->query("SELECT * FROM `matrimonial_ads` WHERE `guid`='$guid'");
     	$files= $file->fetch();
         $desc = str_replace("'","~~",$_POST['description']);
-    	stripslashes($_POST);
+    	//stripslashes($_POST);
         $img = '';
         for($i=0; $i < 3; $i++) {
             $j = $i+1;
@@ -34,8 +34,43 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                 //$img.= $im_name.",";
               } 
         }
-    	$sth = $db->query ("UPDATE `matrimonial_ads` SET `searchfor`='$gender',`txtName`='$txtName',`txtQualification`='$txtQualification',`txtOccupation`='$txtOccupation',`txtWorkPlace`='$txtWorkPlace',`txtMonthIncome`='$txtMonthIncome',`txtBirthCity`='$txtBirthCity',`txtAge`='$txtAge',`txtHeight`='$txtHeight',`txtComplexion`='$txtComplexion',`txtLanguages`='$txtLanguages',`txtReligion`='$txtReligion',`txtSect`='$txtSect',`txtMstatus`='$txtMstatus',`txtChildren`='$txtChildren',`txtFather`='$txtFather',`txtFOccupation`='$txtFOccupation',`txtFPlaceWork`='$txtFPlaceWork',`txtGPFather`='$txtGPFather',`txtGPOccupation`='$txtGPOccupation',`txtGMFather`='$txtGMFather',`txtGMOccupation`='$txtGMOccupation',`txtSiblingsInformation`='$txtSiblingsInformation',`txtAboutFamily`='$txtAboutFamily',`txtAddress`='$txtAddress',`txtCity`='$txtCity',`txtLocality`='$txtLocality',`txtMobile`='$txtMobile',`txtAMobile`='$txtAMobile' WHERE `guid`='$guid'");
+    	$sth = $db->query ("UPDATE `matrimonial_ads` SET `searchfor`='$gender',`txtName`='$txtName',`txtQualification`='$txtQualification',`txtOccupation`='$txtOccupation',`txtWorkPlace`='$txtWorkPlace',`txtMonthIncome`='$txtMonthIncome',`txtBirthCity`='$txtBirthCity',`txtAge`='$txtAge',`txtHeight`='$txtHeight',`txtComplexion`='$txtComplexion',`txtLanguages`='$txtLanguages',`txtReligion`='$txtReligion',`txtSect`='$txtSect',`txtMstatus`='$txtMstatus',`txtChildren`='$txtChildren',`txtFather`='$txtFather',`txtFOccupation`='$txtFOccupation',`txtFPlaceWork`='$txtFPlaceWork',`txtGPFather`='$txtGPFather',`txtGPOccupation`='$txtGPOccupation',`txtGMFather`='$txtGMFather',`txtGMOccupation`='$txtGMOccupation',`txtNumberofbrs`='$txtNumberofbrs',`txtNumberofsis`='$txtNumberofsis',`txtSiblingsInformation`='$txtSiblingsInformation',`txtAboutFamily`='$txtAboutFamily',`txtAddress`='$txtAddress',`txtCity`='$txtCity',`txtLocality`='$txtLocality',`txtMobile`='$txtMobile',`txtAMobile`='$txtAMobile' WHERE `guid`='$guid'");
     //update variant
+
+
+
+     if($_POST["gu_id"]==''){
+      $count = count($_POST["txtsibname"]);
+     
+     }else{
+      $count = count($_POST["txtsibqualification"]);
+     }
+
+ //Getting post values
+    //$count = count($_POST["txtsibname"]);
+    $txtsibname=$_POST["txtsibname"];	
+    $txtsibqualification=$_POST["txtsibqualification"];	
+    $txtsiboccupation=$_POST["txtsiboccupation"];	
+    $txtssibstatus=$_POST["txtsibstatus"];	
+    $txtsibplaceofwork=$_POST["txtsibplaceofwork"];
+    $gu_id=$_POST["guu_id"];
+   
+        $sth = $db->query ("DELETE FROM `matrimonial_ads_sib_details` WHERE `guid_mat_id`='$guid'");
+   for($i=0; $i<$count; $i++)
+   {
+     $t = $_POST['guid'];
+
+    $res=$db->query("SELECT max(pid) FROM `matrimonial_ads`  WHERE `guid`= '$t' ");
+    $result = $res->fetch();
+    $dt=$result[0];
+    //print_r($count); exit;  
+
+       //echo ("INSERT INTO `matrimonial_ads_sib_details` (`pid_sib`,`guid_mat_id`,`txtsibname`,`txtsibqualification`,`txtsiboccupation`,`txtsibstatus`,`txtsibplaceofwork`) VALUES('$dt','$guid','$txtsibname[$i]','$txtsibqualification[$i]','$txtsiboccupation[$i]','$txtssibstatus[$i]','$txtsibplaceofwork[$i]')");exit;  
+           
+       $sth = $db->query ("INSERT INTO `matrimonial_ads_sib_details` (`pid_sib`,`guid_mat_id`,`txtsibname`,`txtsibqualification`,`txtsiboccupation`,`txtsibstatus`,`txtsibplaceofwork`) VALUES('$dt','$guid','$txtsibname[$i]','$txtsibqualification[$i]','$txtsiboccupation[$i]','$txtssibstatus[$i]','$txtsibplaceofwork[$i]')");
+    
+    }
+
 	if($sth > 0) {
 	$post_msg = '<h4 style="color: green;">Details Successfully Updated</h4>';	
 	header('location:'.URL.'matrimonial_ads.php?post_msg='.$post_msg);
@@ -405,7 +440,25 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                       </div>
                     </div>
                   </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                     
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" name="txtNumberofbrs" value="<?php echo $row['txtNumberofbrs']?>" placeholder="No.of Brothers" />
+                        <label style="font-size:10px;color:red;">No.of Brothers</lable>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" name="txtNumberofsis" value="<?php echo $row['txtNumberofsis']?>" placeholder="No.of Sisters" />
+                        <label style="font-size:10px;color:red;">No.of Sisters</lable>
+                      </div>
+                    </div>
+                  </div>
                   <div class="clearfix"></div>
+
                   <div class="col-md-12">
                     <div class="form-group">
                       <div class="col-md-12">
@@ -414,6 +467,89 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                       </div>
                     </div>
                   </div>
+
+
+
+
+                  <div class="form-group col-md-12">
+           
+						<table class="table" id="dynamic_field">
+           
+		      	<tr>
+            <?php 
+			      $m = $db->query("SELECT * FROM  `matrimonial_ads_sib_details` WHERE  guid_mat_id='$guid'"); 
+            //print_r($m);exit;
+            while($z = $m->fetch()){
+              
+          ?>
+
+
+							<div class="col-sm-3">
+              <td> 
+              <label  class="control-label">Name</label>
+              <input type="text" class="form-control required"   name="txtsibname[]" value="<?php echo $z['txtsibname']?>" placeholder="Enter Name" autocomplete="off"/>
+              </td>
+
+              </div>
+                <div class="col-sm-3">
+                <td>
+                  <label  class="control-label">Qualifications</label>
+                  <!-- <select class="form-control required area" name="specialisation[]" id="aid" required>
+                    <option value="">Select Specialisation</option>
+                   
+                  </select> -->
+                  <input type="text" class="form-control required"  name="txtsibqualification[]"  value="<?php echo $z['txtsibqualification'];?>" placeholder="Qualifications" autocomplete="off"/>
+                </td>
+              </div>
+							<div class="col-sm-1">
+              <td><label  class="control-label">Occupations</label>
+              <select class="form-control required" id="txtsibqualification"  onChange="return validate(this.value);"  name="txtsiboccupation[]" aria-required="true">
+              <option value="">Select Occupations</option>
+              <option <?php if($z['txtsiboccupation']=='Government Employee'){ echo 'selected=""'; }?>>Government Employee</option>
+              <option <?php if($z['txtsiboccupation']=='Private Employee'){ echo 'selected=""'; }?>>Private Employee</option>
+              <option <?php if($z['txtsiboccupation']=='Self Business'){ echo 'selected=""'; }?>>Self Business</option>
+              <option <?php if($z['txtsiboccupation']=='Student'){ echo 'selected=""'; }?>>Student</option>
+              </select>
+              </td>
+              </div>
+							<div class="col-sm-2">
+              <td> 
+              <label  class="control-label">Status</label>
+              <select class="form-control required" id="mstatus"  onChange="return validate(this.value);"  name="txtsibstatus" aria-required="true">
+              <option value="">Select Status</option>
+              <option <?php if($z['txtsibstatus']=='Married'){ echo 'selected=""'; }?>>Married</option>
+              <option <?php if($z['txtsibstatus']=='Unmarried'){ echo 'selected=""'; }?>>UnMarried</option>
+              </select>
+              </td>
+              </div>
+			        <div class="col-sm-1">
+              <td>
+              <label  class="control-label">Place of work</label>
+              <input type="text" class="form-control required"   name="txtsibplaceofwork[]" value="<?php echo $z['txtsibplaceofwork']?>" placeholder="Place of Work" autocomplete="off"/>
+              <input type="hidden" class="form-control required"  name="guu_id[]" value="<?php echo $z['guid']?>"/>
+              </td>
+              </div>
+              <div class="col-sm-1">
+               <td> 
+            
+          
+               </td>
+              </div>
+							</tr>
+              <?php } ?>
+						</table>
+						 <button type="button" name="add" id="add" class="btn btn-success"><span>&#43;</span></button>
+            </div>
+
+
+
+
+
+
+
+
+
+
                   <div class="clearfix"></div>
                   <div class="col-md-12">
                     <div class="form-group">
@@ -761,6 +897,47 @@ function checkIt(evt) {
     status = ""
     return true
 }
+
+
+
+
+
+
+$(document).ready(function(){
+	var i=1;
+	$('#add').click(function(){
+		i++;
+		$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text"  name="txtsibname[]" placeholder="Enter Name" class="form-control name_list" /> </td><td><input type="text"  name="txtsibqualification[]" placeholder="Qualification" class="form-control name_list" /> </td> <td><select class="form-control required spec" name="txtsiboccupation[]" id="spec_'+i+'" required><option value="">Select Occupation</option><option value="Government Employee">Government Employee</option><option value="Private Employee">Private Employee</option><option value="Self Business">Self Business</option><option value="Student">Student</option></select></td><td><select class="form-control required spec" name="txtsibstatus[]" id="spec_'+i+'" required><option value="">Select Status</option><option value="Married">Married</option><option value="Unmarried">Unmarried</option></select></td><td><input type="text"  name="txtsibplaceofwork[]" placeholder="Please of Work" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+	
+
+    
+
+
+    
+	    $('#quali_'+i).change(function(){
+      //alert('hi');
+    var cid= $(this).val();
+   console.log(cid);
+    $.ajax({
+    type:"post",
+    //url:"https://adschronicle.com//ajaxReq2.php",
+    url:"http://localhost/adschronicle/ajaxReq2.php",
+    data:"cid="+cid+"&action=fetchexp1",
+     success:function(response){
+      $('#spec_'+i).html(response);
+    return true;
+    }
+    });
+    });
+	    
+	    
+	});
+	
+	$(document).on('click', '.btn_remove', function(){
+		var button_id = $(this).attr("id"); 
+		$('#row'+button_id+'').remove();
+	});
+});
 </script> 
 </body>
 </html>

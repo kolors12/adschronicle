@@ -5,7 +5,7 @@
   extract($_POST);
   $date = date("Y-m-d");
   if(isset($_POST) && $_POST['submit'] == 'SubmitMatrimonal') {
-     echo print_r($_POST); exit;
+     //echo print_r($_POST); exit;
       stripslashes($_POST);
             $tmpFilePath1 = $_FILES['image1']['tmp_name'];
             if ($tmpFilePath1 != ""){
@@ -45,19 +45,70 @@
   		$res;
   		$res=$res+1;
   		$val= 'ADM-'.$res;
-      $pid = md5($txtName."/".$gender."/".time());
+        $pid = md5($txtName."/".$gender."/".time());
         
-		
-echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`, `txtQualification`, `txtOccupation`, `txtWorkPlace`, `txtMonthIncome`, `txtBirthCity`, `txtAge`, `txtHeight`, `txtComplexion`, `txtLanguages`, `txtReligion`, `txtSect`, `txtMstatus`, `txtChildren`, `txtFather`, `txtFOccupation`, `txtFPlaceWork`, `txtGPFather`, `txtGPOccupation`, `txtGMFather`, `txtGMOccupation`, `txtSiblingsInformation`, `txtAboutFamily`, `txtAddress`, `txtCity`, `txtLocality`, `txtMobile`, `txtAMobile`,`txtEmail`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$gender', '$txtName', '$txtQualification', '$txtOccupation', '$txtWorkPlace', '$txtMonthIncome', '$txtBirthCity', '$txtAge', '$txtHeight', '$txtComplexion', '$txtLanguages', '$txtReligion', '$txtSect', '$txtMstatus', '$txtChildren', '$txtFather', '$txtFOccupation', '$txtFPlaceWork', '$txtGPFather', '$txtGPOccupation', '$txtGMFather', '$txtGMOccupation', '$txtSiblingsInformation', '$txtAboutFamily', '$txtAddress', '$txtCity', '$txtLocality', '$txtMobile', '$txtAMobile','$txtEmail', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )";exit;
-  	    $sth = $db->query ("INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`, `txtQualification`, `txtOccupation`, `txtWorkPlace`, `txtMonthIncome`, `txtBirthCity`, `txtAge`, `txtHeight`, `txtComplexion`, `txtLanguages`, `txtReligion`, `txtSect`, `txtMstatus`, `txtChildren`, `txtFather`, `txtFOccupation`, `txtFPlaceWork`, `txtGPFather`, `txtGPOccupation`, `txtGMFather`, `txtGMOccupation`, `txtSiblingsInformation`, `txtAboutFamily`, `txtAddress`, `txtCity`, `txtLocality`, `txtMobile`, `txtAMobile`,`txtEmail`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$gender', '$txtName', '$txtQualification', '$txtOccupation', '$txtWorkPlace', '$txtMonthIncome', '$txtBirthCity', '$txtAge', '$txtHeight', '$txtComplexion', '$txtLanguages', '$txtReligion', '$txtSect', '$txtMstatus', '$txtChildren', '$txtFather', '$txtFOccupation', '$txtFPlaceWork', '$txtGPFather', '$txtGPOccupation', '$txtGMFather', '$txtGMOccupation', '$txtSiblingsInformation', '$txtAboutFamily', '$txtAddress', '$txtCity', '$txtLocality', '$txtMobile', '$txtAMobile','$txtEmail', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )");
-  	$insid = $db->lastInsertId(); 
+    		
+          $count = count($_POST["txtsibname"]);
+          $txttsibname=$_POST["txtsibname"];	
+          $txttsibqualification=$_POST["txtsibqualification"];	
+          $txttsiboccupation=$_POST["txtsiboccupation"];	
+          $txttsibstatus=$_POST["txtsibstatus"];	
+          $txttsibplaceofwork=$_POST["txtsibplaceofwork"];
+            
+    
+    
+    		
+          //echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`, `txtQualification`, `txtOccupation`, `txtWorkPlace`, `txtMonthIncome`, `txtBirthCity`, `txtAge`, `txtHeight`, `txtComplexion`, `txtLanguages`, `txtReligion`, `txtSect`, `txtMstatus`, `txtChildren`, `txtFather`, `txtFOccupation`, `txtFPlaceWork`, `txtGPFather`, `txtGPOccupation`, `txtGMFather`, `txtGMOccupation`,`txtNumberofbrs`,`txtNumberofsis`, `txtSiblingsInformation`, `txtAboutFamily`, `txtAddress`, `txtCity`, `txtLocality`, `txtMobile`, `txtAMobile`,`txtEmail`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$gender', '$txtName', '$txtQualification', '$txtOccupation', '$txtWorkPlace', '$txtMonthIncome', '$txtBirthCity', '$txtAge', '$txtHeight', '$txtComplexion', '$txtLanguages', '$txtReligion', '$txtSect', '$txtMstatus', '$txtChildren', '$txtFather', '$txtFOccupation', '$txtFPlaceWork', '$txtGPFather', '$txtGPOccupation', '$txtGMFather', '$txtGMOccupation', '$txtNumberofbrs','$txtNumberofsis','$txtSiblingsInformation', '$txtAboutFamily', '$txtAddress', '$txtCity', '$txtLocality', '$txtMobile', '$txtAMobile','$txtEmail', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )";exit;
+      	    $sth = $db->query ("INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`, `txtQualification`, `txtOccupation`, `txtWorkPlace`, `txtMonthIncome`, `txtBirthCity`, `txtAge`, `txtHeight`, `txtComplexion`, `txtLanguages`, `txtReligion`, `txtSect`, `txtMstatus`, `txtChildren`, `txtFather`, `txtFOccupation`, `txtFPlaceWork`, `txtGPFather`, `txtGPOccupation`, `txtGMFather`, `txtGMOccupation`, `txtNumberofbrs`,`txtNumberofsis`,`txtSiblingsInformation`, `txtAboutFamily`, `txtAddress`, `txtCity`, `txtLocality`, `txtMobile`, `txtAMobile`,`txtEmail`, `status`, `active_date`, `date`, `image1`, `image2`, `image3`,`adtype` ) VALUES ( '$val', '$pid', '$gender', '$txtName', '$txtQualification', '$txtOccupation', '$txtWorkPlace', '$txtMonthIncome', '$txtBirthCity', '$txtAge', '$txtHeight', '$txtComplexion', '$txtLanguages', '$txtReligion', '$txtSect', '$txtMstatus', '$txtChildren', '$txtFather', '$txtFOccupation', '$txtFPlaceWork', '$txtGPFather', '$txtGPOccupation', '$txtGMFather', '$txtGMOccupation','$txtNumberofbrs','$txtNumberofsis', '$txtSiblingsInformation', '$txtAboutFamily', '$txtAddress', '$txtCity', '$txtLocality', '$txtMobile', '$txtAMobile','$txtEmail', 'DeActive', '', '$date', '$im_name1', '$im_name2', '$im_name3','$adtype' )");
+      	$insid = $db->lastInsertId(); 
+    
+    
+        for($i=0; $i<$count; $i++)
+        {
+         
+          //echo "INSERT INTO `matrimonial_ads_sib_details` (`pid_sib`,`guid_mat_id`,`txtsibname`,`txtsibqualification`,`txtsiboccupation`,`txtsibstatus`,`txtsibplaceofwork`) VALUES('$pid','$insid','$txttsibname[$i]','$txttsibqualification[$i]','$txttsiboccupation[$i]','$txttsibstatus[$i]','$txttsibplaceofwork[$i]')";exit;
+          $sth = $db->query ("INSERT INTO `matrimonial_ads_sib_details` (`pid_sib`,`guid_mat_id`,`txtsibname`,`txtsibqualification`,`txtsiboccupation`,`txtsibstatus`,`txtsibplaceofwork`) VALUES('$pid','$insid','$txttsibname[$i]','$txttsibqualification[$i]','$txttsiboccupation[$i]','$txttsibstatus[$i]','$txttsibplaceofwork[$i]')");
+       
+         }
+      	
   		if($sth > 0) {
   			//$post_msg = '<h4 style="color: green;">Matrimonial Ad Successfully Submitted</h4>';	
   			//header('location:matrimonial_ad.php?post_msg='.$post_msg); ?>
       <script>
       alert("Matrimonial Ad Successfully Submitted");
       window.location="add-packages.php?matrimonialid=<?php echo $insid ?>";
-      </script>
+    </script>
+
+<?php 
+
+      $qs=strip_tags($_POST['txtMobile']);
+      $code = $val;
+      $to = $qs;
+      $amessage = "Dear User, OTP for Franchise Application form is $code. Thank you, AdsChronicle.com";
+      //$message="Hi,".$name." Ur Product Details Are".$message.",".$email.",".$phone." .Thank u for sendsms..";
+      //$asms=str_replace(" ","%20",$amessage);
+      $sms=str_replace(" ","%20","$amessage"); 
+      $aphone = $qs;
+
+      $url = "https://49.50.67.32/smsapi/httpapi.jsp?username=adschron&password=54321&from=ADSCHR&to=$aphone&text=$sms&coding=0&pe_id=1001516986856829022&template_id=1007285132694237634";
+      //	echo $url;
+      function get_data($url) {
+      $ch = curl_init();
+      $timeout = 5;
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+      $data = curl_exec($ch);
+      curl_close($ch);
+      return $data;
+        }
+      get_data($url);
+
+      session_start();
+      $_SESSION['signup_verificationcode']=$code;
+      echo "sent";
+
+?>
 
   		<?php } else { 
   			$post_msg = '<h4 style="color: red;">Please try Again</h4>';	
@@ -123,7 +174,19 @@ echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`,
                 <!--<div class="col-md-6">
                 <button type="button" class="btn btn-info pull-right">Save</button>
                 </div>-->
-                  <div class="col-md-3">
+                  <!--<div class="col-md-3">-->
+                  <!--  <div class="form-group">-->
+                  <!--    <div class="col-sm-12">-->
+                  <!--      <select class="form-control required" name="gender">-->
+                  <!--        <option value="">Select</option>-->
+                  <!--        <option value="BrideGroom">BrideGroom</option>-->
+                  <!--        <option value="Bride">Bride</option>-->
+                  <!--      </select>-->
+                  <!--    </div>-->
+                  <!--  </div>-->
+                  <!--</div>-->
+                  
+                    <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
                       <select class="form-control required" name="gender" type="text" id="dropBox" onchange="changeSelect()">
@@ -136,24 +199,15 @@ echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`,
                       </div>
                     </div>
                   </div>
-
-
-
-                  <!-- <div class="col-md-3">
-                    <div class="form-group">
-                      <div class="col-sm-12">
-                        <select class="form-control required" name="gender">
-                          <option value="">Select</option>
-                          <option value="BrideGroom">BrideGroom</option>
-                          <option value="Bride">Bride</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div> -->
-
-                  
                   <div class="clearfix"></div>
-                  <div class="col-md-3">
+                  <!--<div class="col-md-3">-->
+                  <!--  <div class="form-group">-->
+                  <!--    <div class="col-sm-12">-->
+                  <!--      <input type="text" class="form-control required" minlength="3" name="txtName" placeholder="Bride's/Groom's Full Name">-->
+                  <!--    </div>-->
+                  <!--  </div>-->
+                  <!--</div>-->
+                   <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
                      
@@ -161,13 +215,6 @@ echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`,
                       </div>
                     </div>
                   </div>
-                  <!-- <div class="col-md-3">
-                    <div class="form-group">
-                      <div class="col-sm-12">
-                        <input type="text" class="form-control required" minlength="3" name="txtName" placeholder="Bride's/Groom's Full Name">
-                      </div>
-                    </div>
-                  </div> -->
                   <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
@@ -393,14 +440,17 @@ echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`,
                          <option>Self Employed / Bussiness</option>
                           <option>Government / Private Job</option>
                           <option>Retired</option>
-	                <option>Land Lord</option>
+	 <option>Land Lord</option>
                           <option>Other</option>
                         </select>
                       </div>
                     </div>
                   </div>
-                  <div class="clearfix"></div>
-                  <div class="col-md-12">
+                  
+                     <div class="clearfix"></div>
+                  
+                  
+                    <div class="col-md-12">
                     <div class="form-group">
                       <div class="col-md-12">
                         <label ><strong>About Brother and Sisters (Enter here number of brothers and sisters, their Name, Qualifications, occupations,Status and place of work)</strong></label>
@@ -409,24 +459,24 @@ echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`,
 
                    <div class="">
                       <label  class="col-sm-2  control-label">
-                      No.of Brothers</label>
+                      No.of Brothers : </label>
                       <div class="col-sm-3">
-                      <input type="number"  id="Nofbro" name="numberofbrothers" class="form-control required" placeholder="No.of Brothers" />
+                      <input type="number"  id="Nofbro" name="txtNumberofbrs" class="form-control" placeholder="No.of Brothers" />
                       </div>
                     </div>
                     
                       <label  class="col-sm-2  control-label">
-                      No.of Sisters</label>
+                      No.of Sisters : </label>
                       <div class="col-sm-3">
-                      <input type="number"   id="NofSis" name="numberofsis" class="form-control required"  placeholder="No.of Sisters" />
+                      <input type="number"   id="NofSis" name="txtNumberofsis" class="form-control" placeholder="No.of Sisters" />
                       </div>
                     
                      
                       <div class="col-sm-2">
-                      <button type="button" value="CREATE" id="btnNoOfRec" class="btn btn-primary pull-right">Create</button> 
+                      <button type="button" value="CREATE" id="btnNoOfRec" class="btn btn-info pull-right">Create</button> 
                       
                       </div><br>
-                      <div class="col-sm-1">
+                      <div class="col-sm-2">
                       
                       
                       </div><br>
@@ -436,9 +486,8 @@ echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`,
                       </div>
                     </div>
                   </div>
+                  <div class="clearfix"></div>
                  
-              
- 
                 <div class="clearfix"></div>
                   <div class="col-md-12">
                     <div class="form-group">
@@ -486,7 +535,7 @@ echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`,
                  - <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
-                        <input type="text"  readonly class="form-control required" name="txtCity"  value="<?php echo $_COOKIE['areaname']?>" placeholder="City" />
+                        <input type="text"  readonly class="form-control required" name="txtCity"  value="<?php echo $_COOKIE['areaname'];?>" placeholder="City" />
                       </div>
                     </div>
                   </div>
@@ -503,15 +552,23 @@ echo "INSERT INTO `matrimonial_ads`( `productid`, `pid`, `searchfor`, `txtName`,
 						   </select>
                       </div>
                     </div>
-                  </div>-
+                  </div>
                   <div class="clearfix"></div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
-                        <input type="text" class="form-control number required" minlength="10" maxlength="10" name="txtMobile" onKeyPress="return checkIt();" placeholder="Mobile No. 1">
+                        <input type="text" class="form-control number required" minlength="10" maxlength="10" id="txtMobile"  name="txtMobile" onKeyPress="return checkIt();" placeholder="Mobile No. 1" autocomplete="off">
+                        <span id="span4"></span>
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-sm-3">
+            
+                   <div class="clearfix"><span class="success-text"></span></div>
+                    <input type="text" class="form-control number required" name="txtOTP" id="txtOtp" placeholder="Enter OTP Here" maxlength="4" minlength="4" autocomplete="off"/><br /><a href="javascript:;" style="margin-top:-17px;" class="pull-right text-info resend-code">resend?</a>
+                    <span id="span3"></span>
+                    </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
@@ -628,8 +685,14 @@ document.getElementById("wp").style.display = "block";
 
                }
     });
-
-
+  </script> 
+  
+  
+  
+  
+  <script>
+  
+ 
     function changeSelect() {
     if (document.getElementById("dropBox").value == "1") {
         document.getElementById("divText").innerHTML = "<input type='text' class='form-control required' minlength='3'  placeholder='Bride's/Groom's Full Name'>";
@@ -639,12 +702,16 @@ document.getElementById("wp").style.display = "block";
         document.getElementById("divText").innerHTML = " <input type='text' class='form-control required' minlength='3' name='txtName' placeholder='Grooms Full Name'>";
     } 
 }
-  </script> 
-
-
-
-
-<script>
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+  
+  
 $(document).ready(function () {
       load();
    });
@@ -654,8 +721,8 @@ $(document).ready(function () {
    $("#btnNoOfRec").click(function(){
    $("#AddControll").empty();
   
-   var NofSis = parseInt( document.getElementById("NofSis").value );
-   var Nofbro = parseInt( document.getElementById("Nofbro").value );
+   var NofSis = parseInt( document.getElementById("NofSis").value )
+   var Nofbro = parseInt( document.getElementById("Nofbro").value )
    var NoOfRec = NofSis+Nofbro;
  
  
@@ -672,7 +739,7 @@ $(document).ready(function () {
    var th = "";
    var td = "";
    var tbl = ""; 
-   tbl = "<table class='table table-bordered table-hover '>"+
+   tbl = "<table class='table table-bordered table-hover'>"+
 			"<tr>"+
     			"<th width='5%'>Name</th>"+
     			"<th width='5%'>Qualification </th>"+
@@ -685,10 +752,10 @@ $(document).ready(function () {
 			"</tr>"; 
 			for(i = 1; i <= NoOfRec; i++){ 
 			tbl += "<tr>"+
-			"<td>"+ "<input type='text' class=' table form-control col-3 required' name='name[]'  placeholder='Enter Name'/>" + "</td>"+
-			"<td>"+"<input type='text' class=' table form-control col-3 required' name='qualification[]'  placeholder='Enter Qualification'/>"+"</td>"+
+			"<td>"+ "<input type='text' class=' table form-control col-3' name='txtsibname[]'  placeholder='Enter Name'/>" + "</td>"+
+			"<td>"+"<input type='text' class=' table form-control col-3' name='txtsibqualification[]'  placeholder='Enter Qualification'/>"+"</td>"+
       "<td>"+
-            '<select  class="form-control required" name="occupation[]" id="opt-1">'+
+            '<select  class="form-control" name="txtsiboccupation[]" id="opt-1">'+
             '<option value="">Select Occupation</option>'+
             '<option value="Government Employee">Government Employee</option>'+
             '<option value="Private Employee">Private Employee</option>'+
@@ -697,13 +764,13 @@ $(document).ready(function () {
             '</select>'+
 			"</td>"+  
       "<td>"+
-            '<select  class="form-control required" name="status[]" id="opt-1">'+
+            '<select  class="form-control" name="txtsibstatus[]" id="opt-1">'+
             '<option value="">Select Status</option>'+
             '<option value="Married">Married</option>'+
             '<option value="Unmarried">Unmarried</option>'+
             '</select>'+
 			"</td>"+  
-      "<td>"+"<input type='text' class=' table form-control col-3 required' name='placeofwork[]'  placeholder='Enter Place of Work'/>"+"</td>";
+      "<td>"+"<input type='text' class=' table form-control col-3' name='txtsibplaceofwork[]'  placeholder='Enter Place of Work'/>"+"</td>";
 			tbl += td;
 			
 		
@@ -717,5 +784,108 @@ function removeRow(i) {
     jQuery('#NoOfRec tr'+i).remove();
 }
    
+
+$("#txtMobile").keyup(function(){
+       var userphone=$("#txtMobile").val();
+       if($.isNumeric(userphone) && userphone.length==10){
+    	  $.ajax({
+    			type:"post",
+    			url:"cw_admin/ajaxScripts/matrimonial_ad_verification.php",
+    			data:"qs="+userphone,
+                beforeSend: function(){
+                 $("#span4").html("<img src='images/loaderRevamp.svg' height='25px' width='25px' /> Loading request...");
+                },
+    			success:function(response){
+    			 //   alert(response);
+    			  $("#span4").html('');
+    			  //console.log(response);
+    				var data = $.trim(response);
+                   	if(data == 'sent'){
+                   	    $("#txtEmail").focus();
+                   	    $(".otp-block").show();
+                        $(".submit-button").addClass("disablededit");
+                   	    $("#txtOtp").val('');
+                        //"$("#remail").prop('readonly', true);
+                        $("#span4").html('<i class="fa fa-check-circle-o"></i> OTP sent to &nbsp'+userphone+'.<br/>');
+                        $("#span4").addClass("text-success");
+                        $(".success-text").html('<i class="fa fa-check-circle-o"></i>');
+                        $(".success-text").addClass("text-success");
+    					return true;   
+    				}
+    				else{
+                        $("#span4").html('Sorry!. Please try Again');
+                        $("#span4").addClass("text-danger");
+
+    					return false;
+    				}
+    			}
+    		 });
+        
+       }
+        
+     });
+
+     $('body').delegate("#txtOtp","keyup", function(){
+        var otp = $("#txtOtp").val();
+        if(otp.length==4){
+                     $.ajax({
+                    			type:"post",
+                    			url:"franchise.php",
+                    			data:"vendorotp="+otp+"&action=VerifyOTP",
+                                beforeSend: function(){
+                                 $("#span3").html("<img src='images/loaderRevamp.svg' height='25px' width='25px' /> Validating...");
+                                },
+                    			success:function(response){
+                    			  $("#span3").html('');
+                                  var res = response;
+                                  //alert(res);
+                                  if(res==='1111'){
+                                        $(".resend-code").hide();
+                                        //alert("Your Registration Successfully");
+                                        $(".success-text").html('<i class="fa fa-check-circle-o"></i> OTP Verified. <br/>');
+                                        $(".success-text").removeClass("text-danger");
+                                        $(".success-text").addClass("text-success");
+                                        $(".submit-button").removeClass("disablededit");
+                                    } else if(res==='0101') {
+                                        $(".resend-code").show();
+                                        $(".success-text").html('Invalid OTP <br/>');
+                                        $(".success-text").addClass("text-danger");
+                                        $(".submit-button").addClass("disablededit");
+                                    } 
+                  			    }
+                    });
+ 
+        }
+
+    });
+    $(".resend-code").click(function(){
+        var userphone=$("#txtMobile").val();
+       if($.isNumeric(userphone) && userphone.length==10){
+    	  $.ajax({
+    			type:"post",
+    			url:"cw_admin/ajaxScripts/matrimonial_ad_verification.php",
+    			data:"qs="+userphone,
+                beforeSend: function(){
+                 $("#span3").html("<img src='images/loaderRevamp.svg' height='25px' width='25px' /> Loading request...");
+                },
+    			success:function(response){
+    			
+    			  $("#span3").html('');
+    				var data = $.trim(response);
+                   	if(data == 'sent'){
+                        $(".submit-button").addClass("disablededit");
+                   	    $("#txtOtp").val('');
+                        $(".success-text").html('<i class="fa fa-check-circle-o"></i>OTP sent to &nbsp'+userphone+'.<br/>');
+                        $(".success-text").addClass("text-success");
+    					return true;
+    				}
+    			}
+    		 });	  
+          }       
+        
+    });   
+    
+ 
+ 
 </script>
 </html>

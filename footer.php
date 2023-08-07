@@ -85,7 +85,7 @@
       <div class="row" style="background-color:#CCC; color:#666; padding:15px 0px 15px 0px; ">
       
       <div class="col-md-12" align="center">
-        <p style="padding-bottom:10px"><a href="index.php">Home</a> | <a href="aboutus.html">About us</a> | <a href="advetise.html">Advetise with us</a> | <a href="terms_conditions.html">Terms & Conditions</a> | <a href="customer_care.html">Customer Care</a> | <!--<a href="suggestions.html">Suggestions/Feedback</a> |---> <a href="contactus.html">Contact us</a> | <a href="franchise.php">Franchisees/Resellers Invited</a></p>
+        <p style="padding-bottom:10px"><a href="index.php">Home</a> | <a href="aboutus.html">About us</a> | <a href="advetise.html">Advetise with us</a> | <a href="terms_conditions.html">Terms & Conditions</a> | <a href="customer_care.html">Customer Care</a> | <a href="payment_page.php">Payment</a> | <a href="contactus.html">Contact us</a> | <a href="franchise.php">Franchisees/Resellers Invited</a></p>
         <small style="color:#444">@ 2015 All rights Reserved, <a href="http://adschronicle.com/" style="color:#666">Ads Chronicle</a> is a Registered Trademark. Imitation of design and functionality will attract legal action.</small> </div>
     </div>
   </footer>

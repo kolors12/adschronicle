@@ -2,44 +2,22 @@
   error_reporting(0);
   require("cw_admin/lib/config.php");
   extract($_GET);
-  
-  if(isset($_GET) && $_GET['search']=='Search'){
-              //unset($_POST['search']);
-              //print_r($_POST);exit;
-  			      $srr='';
-              $ser.="search=Search&";
-
-              if(!empty($_GET['txtMobile'])){
-                  $srr.= "txtMobile LIKE '%".$_GET['txtMobile']."%' AND ";
-              
+  extract($_POST);
+  if(isset($_POST) && $_POST['search']=='Search'){
+          
+              if(!empty($_POST['txtMobile'])){
+                $mobile =  $_POST['txtMobile'];
               }
-              if(!empty($_GET['ref_id'])){
-                  $srr.= "guid LIKE '%".$_GET['ref_id']."%' AND ";
-                  
+              if(!empty($_POST['ref_id'])){
+              $ref_id = $_POST['ref_id'];
               }
-
-
-              // if(!empty($_GET['txtJobStatus'])){
-              //     $srr.= "txtJobStatus LIKE '%".$_GET['txtJobStatus']."%' AND ";
-              //     $ser.="txtJobStatus=".$_GET['txtJobStatus']."&";
-              // }
-               $srr;
-        
-              if(!empty($srr)){
-                  $srr = "AND ".substr($srr,0,-4);
-              }
-              if(!empty($ser)){
-                  $ser = substr($ser,0,-1);
-              }
-  			$srr;
-  		  $ser;
+	
                
    }     
-          //echo "SELECT * FROM  `adds_requests` WHERE `bank_ref`=''   $srr ORDER BY `guid` DESC"; exit;   
-   	    $serth = $db->query("SELECT * FROM  `adds_requests` WHERE `bank_ref`=''  $srr");
-        $resu = $serth->fetch();
-        //print_r($resu);
-  
+
+           
+  $serth = $db->query("SELECT * FROM  `adds_requests` WHERE  `txtMobile`='$mobile' AND `guid`='$ref_id'");
+
   ?>
   
 <!DOCTYPE html>
@@ -76,68 +54,6 @@
       <div class="col-md-12"> <a class="btn btn-danger" href="index.php" role="button">Back to Home Page</a> </div>
     </div>
   </header>
-  <!-- <div class="row" style="padding:10px 0px 0px 0px;">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="" style="background-color:#01ADED; padding:10px; margin-bottom:25px; color:#FFF" align="center"> <strong>Maximise your profit. Advertise with Adschronicle.com</strong> </div>
-        </div>
-        <div class="col-md-6"> <img src="images/incresa.jpg" class="img-responsive"  alt=""/> <br>
-          <p style="font-size:16px"> <strong>Grow your Business with AdsChronicle.com </strong>
-            </h4>
-          
-          <h4>
-          <strong>To advertise, call 040 6661 6544</strong>
-          </p>
-        </div>
-        <div class="col-md-6">
-          <p style="font-size:16px"><strong>Call 040 6661 6544 or fill this form</strong></p>
-          <div class="panel panel-info" style="margin-top:20px; margin-bottom:25px">
-            <div class="panel-heading text-center"><strong>Multiply your Business</strong></div>
-            <div class="panel-body">
-            <form class="form-horizontal" action="sug.php" method="post">
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-4 control-label">Full Name</label>
-                  <div class="col-md-1" style="padding-top:5px">:</div>
-                  <div class="col-sm-7">
-                    <input type="text" class="form-control"  pattern="[A-Za-z\s]+"  minlength="3" maxlength="22" name="fname" id="exampleInputEmail1" placeholder="Full Name" required="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-4 control-label">Phone No</label>
-                  <div class="col-md-1" style="padding-top:5px">:</div>
-                  <div class="col-sm-7">
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="phone" maxlength="10" pattern="^\d{10}$" placeholder="Phone No" required="" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-4 control-label">Email-id</label>
-                  <div class="col-md-1" style="padding-top:5px">:</div>
-                  <div class="col-sm-7">
-                    <input type="email" class="form-control" id="exampleInputEmail1"  name="email" placeholder="Email-id" required="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-md-4 control-label">Enquiry</label>
-                  <div class="col-md-1" style="padding-top:5px">:</div>
-                  <div class="col-md-7">
-                    <textarea class="form-control" placeholder="Enquiry"  name="msg"  rows="2"></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-5 col-sm-7">
-                    <button type="submit" value="submit" name="submit" class="btn btn-info">Submit</button>
-                    <button type="reset" class="btn btn-info">Reset</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div> -->
 
 
   <div class="row" style="padding:10px 0px 0px 0px;">
@@ -145,9 +61,9 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="panel panel-info" style="margin-top:20px; margin-bottom:25px">
-            <div class="panel-heading text-center"><strong>Payment Page</strong></div>
+            <div class="panel-heading text-center"><strong>Update Details and Payment Page </strong></div>
             <div class="panel-body">
-              <form class="form-horizontal" action="payment_page.php" method="get">
+              <form class="form-horizontal" action="payment_page.php" method="POST">
                 
 
                 <div class="form-group">
@@ -193,22 +109,59 @@
 
       <table class='table table-bordered table-hover'>
 			<tr>
+      <?php 
+      
+      ?>
     			<th width='5%'>Name</th>
     		  <th width='5%'>Mobile Number</th>
           <th width='5%'>Email</th>
           <th width='5%'>Status</th>
+          <th width='5%'>Update Profile</th>
+       
           <th width='5%'>Payment</th>
+          
+
+          
 			
     	</tr>
-			
+			<?php 
+      if($serth->rowCount() > 0){
+      $n = 1;
+      while($ta_row = $serth->fetch()){
+      ?>
 			<tr>
-			<td><input type='text' class=' table form-control col-3' value="<?php echo $resu['txtName'];?>"  placeholder='Enter Name'/></td>
-			<td><input type='text' class=' table form-control col-3' value="<?php echo $resu['txtEmail'];?>"  placeholder='Email'/></td>
-      <td><input type='text' class=' table form-control col-3' value="<?php echo $resu['txtName'];?>"  placeholder='Email'/></td>
-      <td><input type='text' class=' table form-control col-3' value="Not Paid"  placeholder='Email'/></td>
-      <td> <button type="submit" name="" value="" class="btn btn-info">Pay Now</button></td>
-		  </tr>
+			<td><input type='text' class=' table form-control col-3' value="<?php echo $ta_row['txtName'];?>"  placeholder='Enter Name'/></td>
+			<td><input type='text' class=' table form-control col-3' value="<?php echo $ta_row['txtMobile'];?>"  placeholder='Email'/></td>
+      <td><input type='text' class=' table form-control col-3' value="<?php echo $ta_row['txtEmail'];?>"  placeholder='Email'/></td>
+      <td><?php if($ta_row['status']==''){?>
+        <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Not Activated yet</span><?php }?>
+        <?php if($ta_row['status']=='DeActive'){?>
+        <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Subscription plan Completed</span><?php }?>
 
+        <?php if($ta_row['status']=='Active'){?>
+        <span class='btn btn-block btn-sm btn-success disabled green_btn'>Active</span><?php }?>
+      
+      </td>
+      <td style="text-align: center">
+      <a href="Update_Classified_text_add.php?guid=<?php echo $ta_row['guid']; ?>"><button type="submit"  class="btn btn-info btn-sm">Update</button></a>
+      </td>
+
+      <td>
+      <?php if(($ta_row['status']=='' || $ta_row['status']=='DeActive' )){?>
+        <a href="add-packages.php?typeid=<?php echo $ta_row['guid']; ?>"><button type="submit" name="" value="" class="btn btn-info btn-sm">Pay Now</button></a>
+        <?php }?>
+        <?php if($ta_row['status']=='Active'){?>
+        <span class='btn btn-block btn-sm btn-success disabled green_btn'>Payment Done</span><?php }?>
+      </td>
+
+		  </tr>
+      <?php $i++;  } } else { ?>
+			<tr >
+      <td colspan="6" style="text-align: center"> 
+      <div class="td-bg-first" style= "color:red"> <b><?php echo "No result Found...!" ?></b></div>
+      </td>
+      </tr>
+      <?php } ?>
 			
 			</table>
      </div>

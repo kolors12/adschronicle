@@ -3,6 +3,7 @@
   require("cw_admin/lib/config.php");
   extract($_GET);
   extract($_POST);
+
   if(isset($_POST) && $_POST['search']=='Search'){
           
               if(!empty($_POST['txtMobile'])){
@@ -14,9 +15,17 @@
 	
                
    }     
-
-           
-  $serth = $db->query("SELECT * FROM  `adds_requests` WHERE  `txtMobile`='$mobile' AND `guid`='$ref_id'");
+  
+   if($_POST['service'] == 'Classified TEXT AD'){
+    $serth = $db->query("SELECT * FROM  `adds_requests` WHERE  `txtMobile`='$mobile' AND `guid`='$ref_id'");
+   }else if($_POST['service'] == 'Business AD'){
+   $mat = $db->query("SELECT * FROM  `add_services` WHERE  `phone_no1`='$mobile' AND `productid`='$ref_id'");
+   }else if($_POST['service'] == 'Matrimonial AD'){
+    echo 'Matrimonial AD';
+   } else {
+    echo 'Job Seeker AD';
+   }      
+ 
 
   ?>
   
@@ -70,12 +79,13 @@
                   <label for="inputEmail3" class="col-sm-4 control-label">Service Type</label>
                   <div class="col-md-1" style="padding-top:5px">:</div>
                   <div class="col-sm-7">
-                  <select  name="areas" class="SlectBox form-control">
+                  <select  name="service" class="SlectBox form-control">
                
                 <option value="">Select Service</option>
                 <option value="Classified TEXT AD">Classified TEXT AD</option>
+                <option value="Business AD">Business AD</option>
                 <option value="Matrimonial AD">Matrimonial AD</option>
-                <option value="Job Seeker Ad">Job Seeker Ad</option>
+                <option value="Job Seeker AD">Job Seeker AD</option>
          
               </select>
                   </div>
@@ -106,24 +116,16 @@
           </div>
         </div>
       </div>
-
+      <?php if($_POST['service'] == 'Classified TEXT AD'){ ?>
       <table class='table table-bordered table-hover'>
 			<tr>
-      <?php 
-      
-      ?>
-    			<th width='5%'>Name</th>
-    		  <th width='5%'>Mobile Number</th>
-          <th width='5%'>Email</th>
-          <th width='5%'>Status</th>
-          <th width='5%'>Update Profile</th>
-       
-          <th width='5%'>Payment</th>
-          
-
-          
-			
-    	</tr>
+      <th width='5%'>Name</th>
+      <th width='5%'>Mobile Number</th>
+      <th width='5%'>Email</th>
+      <th width='5%'>Status</th>
+      <th width='5%'>Update Profile</th>
+      <th width='5%'>Payment</th>
+       </tr>
 			<?php 
       if($serth->rowCount() > 0){
       $n = 1;
@@ -164,6 +166,67 @@
       <?php } ?>
 			
 			</table>
+
+      <?php } ?>
+
+      <?php if($_POST['service'] == 'Business AD'){ ?>
+      <table class='table table-bordered table-hover'>
+			<tr>
+      <th width='7%'>Name</th>
+      <th width='4%'>Mobile Number</th>
+      <th width='5%'>Email</th>
+      <th width='3%'>Status</th>
+      <th width='3%'>Update Profile</th>
+      <th width='3%'>Payment</th>
+       </tr>
+			<?php 
+      
+      if($mat->rowCount() > 0){
+      $n = 1;
+      while($mat_row = $mat->fetch()){
+      ?>
+			<tr>
+			<td><input type='text' class=' table form-control col-3' value="<?php echo $mat_row['add_title'];?>"  placeholder='Enter Name'/></td>
+			<td><input type='text' class=' table form-control col-3' value="<?php echo $mat_row['phone_no1'];?>"  placeholder='Email'/></td>
+      <td><input type='text' class=' table form-control col-3' value="<?php echo $mat_row['email_id'];?>"  placeholder='Email'/></td>
+      <td><?php if($mat_row['status']==''){?>
+        <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Not Activated yet</span><?php }?>
+        <?php if($mat_row['status']=='DeActive'){?>
+        <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Subscription plan Completed</span><?php }?>
+
+        <?php if($mat_row['status']=='Active'){?>
+        <span class='btn btn-block btn-sm btn-success disabled green_btn'>Active</span><?php }?>
+      
+      </td>
+      <td style="text-align: center">
+      <a href="Update_business_ads.php?guid=<?php echo $mat_row['guid']; ?>"><button type="submit"  class="btn btn-info btn-sm">Update</button></a>
+      </td>
+
+      <td>
+      <?php if(($mat_row['status']=='' || $mat_row['status']=='DeActive' )){?>
+        <a href="add-packages.php?serviceid=<?php echo $mat_row['guid']; ?>"><button type="submit" name="" value="" class="btn btn-info btn-sm">Pay Now</button></a>
+        <?php }?>
+        <?php if($mat_row['status']=='Active'){?>
+        <span class='btn btn-block btn-sm btn-success disabled green_btn'>Payment Done</span><?php }?>
+      </td>
+
+		  </tr>
+      <?php $i++;  } } else { ?>
+			<tr >
+      <td colspan="6" style="text-align: center"> 
+      <div class="td-bg-first" style= "color:red"> <b><?php echo "No result Found...!" ?></b></div>
+      </td>
+      </tr>
+      <?php } ?>
+			
+			</table>
+
+ <?php }?>
+
+
+
+
+
      </div>
     
     <div class="clearfix"></div>

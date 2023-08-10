@@ -7,83 +7,69 @@
   if(isset($_POST) && $_POST['submit'] == 'Save') {
   	//stripslashes($_POST);
       $r = $_POST['guid'];
+      //print_r($_POST);exit;
       $desc = str_replace("'","~~",$_POST['description']);
-        //Get the temp file path
-            $tmpFilePath1 = $_FILES['image1']['tmp_name'];
-            if ($tmpFilePath1 != ""){
-              $im_name1 = time().$_FILES['image1']['name'];
-              $newFilePath1 = "adminupload/" . $im_name1;
-               if(move_uploaded_file($tmpFilePath1, $newFilePath1)) {
-               }
-            }
-            $tmpFilePath21 = $_FILES['image21']['tmp_name'];
-            if ($tmpFilePath21 != ""){
-              $im_name21 = time().$_FILES['image21']['name'];
-              $newFilePath21 = "adminupload/" . $im_name21;
-               if(move_uploaded_file($tmpFilePath21, $newFilePath21)) {
-               }
-            }
-            $tmpFilePath22 = $_FILES['image22']['tmp_name'];
-            if ($tmpFilePath22 != ""){
-              $im_name22 = time().$_FILES['image22']['name'];
-              $newFilePath22 = "adminupload/" . $im_name22;
-               if(move_uploaded_file($tmpFilePath22, $newFilePath22)) {
-               }
-            }
-            $tmpFilePath23 = $_FILES['image23']['tmp_name'];
-            if ($tmpFilePath23 != ""){
-              $im_name23 = time().$_FILES['image23']['name'];
-              $newFilePath23 = "adminupload/" . $im_name23;
-               if(move_uploaded_file($tmpFilePath23, $newFilePath23)) {
-               }
-            }
-            $tmpFilePath24 = $_FILES['image24']['tmp_name'];
-            if ($tmpFilePath24 != ""){
-              $im_name24 = time().$_FILES['image24']['name'];
-              $newFilePath24 = "adminupload/" . $im_name24;
-               if(move_uploaded_file($tmpFilePath24, $newFilePath24)) {
-               }
-            }
-            $tmpFilePath25 = $_FILES['image25']['tmp_name'];
-            if ($tmpFilePath25 != ""){
-              $im_name25 = time().$_FILES['image25']['name'];
-              $newFilePath25 = "adminupload/" . $im_name25;
-               if(move_uploaded_file($tmpFilePath25, $newFilePath25)) {
-               }
-            }
-  
-            $tmpFilePath3 = $_FILES['image3']['tmp_name'];
-            if ($tmpFilePath3 != ""){
-              $im_name3 = time().$_FILES['image3']['name'];
-              $newFilePath3 = "adminupload/" . $im_name3;
-               if(move_uploaded_file($tmpFilePath3, $newFilePath3)) {
-               }
-            }
-            $tmpFilePath4 = $_FILES['image4']['tmp_name'];
-            if ($tmpFilePath4 != ""){
-              $im_name4 = time().$_FILES['image4']['name'];
-              $newFilePath4 = "adminupload/" . $im_name4;
-               if(move_uploaded_file($tmpFilePath4, $newFilePath4)) {
-               }
-            }
-          
-      	
-  		
-       ////echo  "INSERT INTO `add_services`(`productid`, `pid`, `cid`, `aid`,`category`, `add_title`, `email_id`, `phone_no1`, `phone_no2`, `website`, `contact_person`, `working_hours`, `offered_services`, `description`, `address`, `address_location`, `pincode`, `date`, `images1`, `images21`, `images22`, `images23`, `images24`, `images25`, `images3`, `images4`, `video_link`, `discount_offers`, `deal_title`, `coupon_code`,`agency_code`,`discount_offer`,`latitude`,`longitude`,`adtype`,`txtOTP`) VALUES ('$val', '$pid', '$cid', '$aid','$category', '$add_title', '$email_id', '$phone_no1', '$phone_no2', '$website', '$contact_person', '$working_hours', '$offered_services', '$desc', '$address', '$address_location', '$pincode', '$date', '$im_name1', '$im_name21', '$im_name22', '$im_name23', '$im_name24', '$im_name25', '$im_name3', '$im_name4', '$video_link', '$discount_offers', '$deal_title', '$coupon_code', '$agency_code','$chkPassPort','$latitude','$longitude','$adtype','$txtOTP')";exit;
-  	
-  	   // $sth = $db->query ( "INSERT INTO `add_services`(`productid`, `pid`, `cid`, `aid`,`category`, `add_title`, `email_id`, `phone_no1`, `phone_no2`, `website`, `contact_person`, `working_hours`, `offered_services`, `description`, `address`, `address_location`, `pincode`, `date`, `images1`, `images21`, `images22`, `images23`, `images24`, `images25`, `images3`, `images4`, `video_link`, `discount_offers`, `deal_title`, `coupon_code`,`agency_code`,`discount_offer`,`latitude`,`longitude`,`adtype`,`txtOTP`) VALUES ('$val', '$pid', '$cid', '$aid','$category', '$add_title', '$email_id', '$txtMobile', '$phone_no2', '$website', '$contact_person', '$working_hours', '$offered_services', '$desc', '$address', '$address_location', '$pincode', '$date', '$im_name1', '$im_name21', '$im_name22', '$im_name23', '$im_name24', '$im_name25', '$im_name3', '$im_name4', '$video_link', '$discount_offers', '$deal_title', '$coupon_code', '$agency_code','$chkPassPort','$latitude','$longitude','$adtype','$txtOTP')");
-  		
+       
+  			stripslashes($_POST);
+        $img = '';
+        for($i=0; $i < 4; $i++) {
+            $j = $i+1;
+            if($j!='2'){
+              //Get the temp file path
+              $tmpFilePath = $_FILES['image'.$j]['tmp_name'];
+              //Make sure we have a filepath
+              if(!empty($tmpFilePath)){
+                //Setup our new file path
+                $im_name = time().$_FILES['image'.$j]['name'];
+                $newFilePath = "adminupload/" . $im_name;
+                //Upload the file into the temp dir
+                if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+                  unlink("adminupload/".$files['images'.$j]);
+                  //Handle other code here
+                  //$img.= $im_name.",";
+                  //echo "UPDATE `add_services` SET images.$j = '$im_name' WHERE `guid`='$guid'";
+                  $sth =  $db->query("UPDATE `add_services` SET images$j = '$im_name' WHERE `guid`='$guid'");
+                } 
+                //$img.= $im_name.",";
+              } 
+          }
+        }
+         for($k=0; $k < 5; $k++) {
+            $l = $k+21;
+              //Get the temp file path
+              $tmpFilePath1 = $_FILES['image'.$l]['tmp_name'];
+              //Make sure we have a filepath
+              if(!empty($tmpFilePath1)){
+                //Setup our new file path
+                $im_name1 = time().$_FILES['image'.$l]['name'];
+                $newFilePath1 = "adminupload/" . $im_name1;
+                //Upload the file into the temp dir
+                if(move_uploaded_file($tmpFilePath1, $newFilePath1)) {
+                  unlink("adminupload/".$files['images'.$l]);
+                  //Handle other code here
+                  //$img.= $im_name.",";
+                  //echo "UPDATE `add_services` SET images.$j = '$im_name' WHERE `guid`='$guid'";
+                  $db->query("UPDATE `add_services` SET images$l = '$im_name1' WHERE `guid`='$guid'");
+                } 
+                //$img.= $im_name.",";
+              } 
+        } 
+  	//	//echo $img; exit;
+        //exit;
 
        $sth = $db->query ("UPDATE `add_services` SET `add_title`='$add_title',`category`='$category',`cid`='$cid',`aid`='$aid',`offered_services`='$offered_services',`pincode`='$pincode',`description`='$description',`address`='$address',`phone_no1`='$phone_no1',`phone_no2`='$phone_no2',`contact_person`='$contact_person',`email_id`='$email_id',`address_location`='$address_location',`video_link`='$video_link',`website`='$website',`working_hours`='$working_hours',`discount_offer`='$chkPassPort',`discount_offers`='$discount_offers',`agency_code`='$agency_code' WHERE `guid`='$guid'");
 
-       if($sth > 0) {?>
+     if($sth > 0) {?>
 
-        <script>alert("successfully updated"); window.location="Update_business_ads.php?guid=.$guid;"</script>
-      <?php 
-        } else { ?>
-      <script>alert("Please try Again"); window.location"Update_business_ads.php?guid=.$guid;"</script>
-        <?php }?>
-  <?php }?>
+    <?php 
+         $post_msg = '<h4 style="color: green;">Updated Successfully</h4>';	
+  			header('location:Update_business_ads.php?guid='.$_POST['guid']);
+  		} else { 
+  			$post_msg = '<h4 style="color: red;">Please try Again</h4>';	
+  			header('location:Update_business_ads.php?post_msg='.$post_msg);
+   		} ?>
+      
+<?php }?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -294,6 +280,9 @@
                       <label for="exampleInputFile">Upload Discount/Promotional</label>
                       <input id="txtPassportNumber" type="file" name="image4" class="form-control">
                       <label>Upload image .jpg/.jpeg extension with size of 350x320px &lt; 100KB </label>
+                      <?php if(!empty($row['images4'])){?>
+                          <img src="adminupload/<?php echo $row['images4'] ?>" alt="" class="img-thumbnail" height="120px" width="120px"/>
+                          <?php } ?>
                     </div>
                      <div class="clearfix"></div>
                   </div>
@@ -314,23 +303,33 @@
 
                   <label>Upload title image</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://adschronicle.com/categories.php?category=5 "  target="_blank" align="right"> ( Click to see where this image displays )</a> 
                    
-                  <input type="file" name="image1" class="form-control required"/>
+                  <input type="file" name="image1" class="form-control"/>
                   <label>Upload image .jpg/.jpeg extension with size of 200x75px < 50KB </label>
+                  <?php if(!empty($row['images1'])){?>
+                  <img src="adminupload/<?php echo $row['images1'] ?>" alt="" class="img-thumbnail" height="120px" width="120px"/>
+                  <?php } ?>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="exampleInputFile">Upload image 1</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://adschronicle.com/c_viewdetails.php?service=b20b15153240099b62b491ebde4e95ab"   target="_blank" align="right"> ( Click to see where this image displays )</a> 
-                  <input type="file" name="image21" class="form-control required"/>
+                  <input type="file" name="image21" class="form-control"/>
                   <label>Upload image .jpg/.jpeg extension with size of 370x350px < 100KB </label>
+                  <?php if(!empty($row['images21'])){?>
+                  <img src="adminupload/<?php echo $row['images21'] ?>" alt="" class="img-thumbnail" height="120px" width="120px"/>
+                  <?php } ?>
+                  
                 </div>
               </div>
               <div class="clearfix"></div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="exampleInputFile">Upload image 2</label>
-                  <input type="file" name="image22" class="form-control required"/>
+                  <input type="file" name="image22" class="form-control"/>
                   <label>Upload image .jpg/.jpeg extension with size of 370x350px < 100KB </label>
+                  <?php if(!empty($row['images22'])){?>
+                          <img src="adminupload/<?php echo $row['images22'] ?>" alt="" class="img-thumbnail" height="120px" width="120px"/>
+                          <?php } ?>
                 </div>
               </div>
               <div class="col-md-6">
@@ -338,6 +337,9 @@
                   <label for="exampleInputFile">Upload image 3</label>
                   <input type="file" name="image23" class="form-control"/>
                   <label>Upload image .jpg/.jpeg extension with size of 370x350px < 100KB </label>
+                  <?php if(!empty($row['images23'])){?>
+                          <img src="adminupload/<?php echo $row['images23'] ?>" alt="" class="img-thumbnail" height="120px" width="120px"/>
+                          <?php } ?>
                 </div>
               </div>
               <div class="clearfix"></div>
@@ -346,6 +348,9 @@
                   <label for="exampleInputFile">Upload image 4</label>
                   <input type="file" name="image24" class="form-control"/>
                   <label>Upload image .jpg/.jpeg extension with size of 370x350px < 100KB </label>
+                  <?php if(!empty($row['images24'])){?>
+                  <img src="adminupload/<?php echo $row['images24'] ?>" alt="" class="img-thumbnail" height="120px" width="120px"/>
+                  <?php } ?>
                 </div>
               </div>
               <!--div class="col-md-6">
@@ -361,6 +366,10 @@
                   <label for="exampleInputFile">Upload Brochure</label>
                       <input type="file" name="image3" class="form-control"/>
                   <label>Upload docx, pdf, jpg files < 500KB </label>
+                  <?php if(!empty($row['images3'])){?><br>
+                    <img src="adminupload/<?php echo $row['images3'] ?>" alt="" class="img-thumbnail" height="120px" width="120px"/>
+                          <!-- <a href="adminupload/<?php //echo $row['images3'] ?>" target="_blank"> View Brochure/Bio Data </a> -->
+                          <?php } ?>
                 </div>
               </div>
               <!--<div class="col-md-6">

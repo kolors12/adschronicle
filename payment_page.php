@@ -21,7 +21,7 @@
    }else if($_POST['service'] == 'Business AD'){
    $mat = $db->query("SELECT * FROM  `add_services` WHERE  `phone_no1`='$mobile' AND `productid`='$ref_id'");
    }else if($_POST['service'] == 'Matrimonial AD'){
-    echo 'Matrimonial AD';
+   $matr_add = $db->query("SELECT * FROM  `matrimonial_ads` WHERE  `txtMobile`='$mobile' AND `productid`='$ref_id'");
    } else {
     echo 'Job Seeker AD';
    }      
@@ -44,7 +44,16 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
-
+<style>
+      .cls { 
+      color: #F60; 
+      }
+      .disablededit {
+      cursor: inherit;
+      cursor: none;
+      pointer-events: none;
+      }
+      </style>
 <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="js/crawler.js" type="text/javascript"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -72,14 +81,14 @@
           <div class="panel panel-info" style="margin-top:20px; margin-bottom:25px">
             <div class="panel-heading text-center"><strong>Update Details and Payment Page </strong></div>
             <div class="panel-body">
-              <form class="form-horizontal" action="payment_page.php" method="POST">
+              <form class="form-horizontal" id="add_form" action="payment_page.php" method="POST">
                 
 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-4 control-label">Service Type</label>
                   <div class="col-md-1" style="padding-top:5px">:</div>
                   <div class="col-sm-7">
-                  <select  name="service" class="SlectBox form-control">
+                  <select  name="service"  id="service" class="SlectBox form-control required">
                
                 <option value="">Select Service</option>
                 <option value="Classified TEXT AD">Classified TEXT AD</option>
@@ -94,14 +103,14 @@
                   <label for="inputEmail3" class="col-sm-4 control-label">Phone No</label>
                   <div class="col-md-1" style="padding-top:5px">:</div>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="txtMobile" name="txtMobile" maxlength="10" pattern="^\d{10}$" placeholder="Phone No" required="" >
+                    <input type="text" class="form-control required" id="txtMobile" name="txtMobile" maxlength="10" pattern="^\d{10}$" placeholder="Phone No" >
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-4 control-label">Reference Number</label>
                   <div class="col-md-1" style="padding-top:5px">:</div>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control"    minlength="5" maxlength="10" name="ref_id" id="ref_id" placeholder="Reference Number" required="">
+                    <input type="text" class="form-control required"    minlength="5" maxlength="10" name="ref_id" id="ref_id" placeholder="Reference Number">
                   </div>
                 </div>
                 
@@ -167,9 +176,9 @@
 			
 			</table>
 
-      <?php } ?>
+      <?php } else if($_POST['service'] == 'Business AD') { ?>
 
-      <?php if($_POST['service'] == 'Business AD'){ ?>
+     
       <table class='table table-bordered table-hover'>
 			<tr>
       <th width='7%'>Name</th>
@@ -221,7 +230,71 @@
 			
 			</table>
 
- <?php }?>
+     <?php } else if($_POST['service'] == 'Matrimonial AD'){?>
+   
+      <table class='table table-bordered table-hover'>
+			<tr>
+      <th width='5%'>Service Type</th>
+      <th width='5%'>Name</th>
+      <th width='4%'>Mobile Number</th>
+      <th width='5%'>Email</th>
+      <th width='4%'>Status</th>
+      <th width='5%'>Update Profile</th>
+      <th width='3%'>Payment</th>
+       </tr>
+			<?php 
+      if($matr_add->rowCount() > 0){
+      $n = 1;
+      while($mattri_row = $matr_add->fetch()){
+      ?>
+			<tr>
+      <td><input type='text' class=' table form-control col-3' value="Matrimonial ADD"  placeholder='Enter Name'/></td>
+			<td><input type='text' class=' table form-control col-3' value="<?php echo $mattri_row['txtName'];?>"  placeholder='Enter Name'/></td>
+			<td><input type='text' class=' table form-control col-3' value="<?php echo $mattri_row['txtMobile'];?>"  placeholder='Email'/></td>
+      <td><input type='text' class=' table form-control col-3' value="<?php echo $mattri_row['txtEmail'];?>"  placeholder='Email'/></td>
+      <td><?php if($mattri_row['status']==''){?>
+        <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Not Activated yet</span><?php }?>
+        <?php if($mattri_row['status']=='DeActive'){?>
+        <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Subscription plan Completed</span><?php }?>
+
+        <?php if($mattri_row['status']=='Active'){?>
+        <span class='btn btn-block btn-sm btn-success disabled green_btn'>Active</span><?php }?>
+      
+      </td>
+      <td style="text-align: center">
+      <a href="update_matrimonial_ad.php?guid=<?php echo $mattri_row['guid']; ?>"><button type="submit"  class="btn btn-info btn-sm">Update</button></a>
+      </td>
+
+      <td>
+      <?php if(($mattri_row['status']=='' || $mattri_row['status']=='DeActive' )){?>
+        <a href="add-packages.php?matrimonialid=<?php echo $mattri_row['guid']; ?>"><button type="submit" name="" value="" class="btn btn-info btn-sm">Pay Now</button></a>
+        <?php }?>
+        <?php if($mattri_row['status']=='Active'){?>
+        <span class='btn btn-block btn-sm btn-success disabled green_btn'>Payment Done</span><?php }?>
+      </td>
+
+		  </tr>
+      <?php $i++;  } } else { ?>
+			<tr >
+      <td colspan="6" style="text-align: center"> 
+      <div class="td-bg-first" style= "color:red"> <b><?php echo "No result Found...!" ?></b></div>
+      </td>
+      </tr>
+      <?php } ?>
+			
+			</table>
+
+      
+      
+      
+      
+
+
+
+    
+   <?php } else { ?>
+   <?php echo 'Job Seeker AD'; ?>
+   <?php }     ?>
 
 
 
@@ -240,6 +313,14 @@
 </div>
 <script src="js/bootstrap.min.js"></script> 
 <!-- Modal -->
-
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+  <script>
+    $(document).ready(function(){ 
+     $(".datepicker").datepicker({format: "dd-mm-yyyy", autoclose: true});
+     $("#add_form").validate({
+         errorClass:'cls'
+      });
+     });
+     </script>
 </body>
 </html>

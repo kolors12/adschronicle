@@ -283,17 +283,14 @@
       <?php } ?>
 			
 			</table>
-
-      
-      
-      
-      
+    <?php } else { ?>
 
 
-
-    
-   <?php } else { ?>
    <?php echo 'Job Seeker AD'; ?>
+
+
+
+   
    <?php }     ?>
 
 

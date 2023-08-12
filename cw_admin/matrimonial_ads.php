@@ -463,7 +463,7 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                     <div class="form-group">
                       <div class="col-md-12">
                         <label ><strong>About Brother and Sisters</strong></label>
-                        <textarea class="form-control required" name="txtSiblingsInformation" placeholder="Enter here number of brother and sisters, their qualifications, occupations and place of work" rows="3"><?php echo $row['txtSiblingsInformation']?></textarea>
+                        
                       </div>
                     </div>
                   </div>
@@ -577,14 +577,15 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
                   <div class="col-md-3">
                     <div class="form-group">
                       <div class="col-sm-12">
-  <select class="form-control required" name="txtLocality" >
+                        <select class="form-control required" name="txtLocality" >
                           <option value="" >Locality of Residence</option>
                           <?php $cth = $db->query("SELECT a.name FROM `areas` a, `cities` c WHERE c.name='".$row['txtCity']."' AND a.sid=c.guid ORDER BY name ASC");
                             foreach($cth as $crow){
                             echo '<option '; if($crow['name']==$row['txtLocality']){ echo "selected=''"; }echo ' >'.$crow['name'].'</option>';
                             }
                            ?>
-                        </select>                     </div>
+                        </select>                     
+                      </div>
                     </div>
                   </div>
                   <div class="clearfix"></div>

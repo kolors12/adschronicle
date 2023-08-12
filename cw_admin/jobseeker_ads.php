@@ -54,12 +54,12 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
   
   
   		       
-         if($_POST["txtEducation"]==''){
-           $count = count($_POST["marks"]);
-          
-         }else{
-           $count = count($_POST["txtEducation"]);
-         }
+      if($_POST["txtEducation"]==''){
+      $count = count($_POST["marks"]);
+
+      }else{
+      $count = count($_POST["txtEducation"]);
+      }
       //Getting post values
       $skill=$_POST["txtEducation"];	
       $skill6=$_POST["specialisation"];	
@@ -69,33 +69,22 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
       $gu_id=$_POST["guu_id"];
         
            
-        for($i=0; $i<$count; $i++)
-        {
-          $t = $_POST['guid'];
-	
-	     $res=$db->query("SELECT max(jbaq_id) FROM `jobseeker_ads_qualification`  WHERE `js_id`= '$t' ");
-  		$result = $res->fetch();
-  		$dt=$result[0];
+      for($i=0; $i<$count; $i++)
+      {
+      $t = $_POST['guid'];
+
+      $res=$db->query("SELECT max(jbaq_id) FROM `jobseeker_ads_qualification`  WHERE `js_id`= '$t' ");
+      $result = $res->fetch();
+      $dt=$result[0];
 	  // print_r($count); exit;  
 	   
-            if ($skill =='') {
-                
-             
-            //echo ("UPDATE  `jobseeker_ads_qualification` SET  `txtEducation`='$skill[$i]',`specialisation`='$skill6[$i]',`marks`='$skill7[$i]',`university`='$skill8[$i]', `yearpassing`='$skill9[$i]'  WHERE `js_id`='$guid'");exit;
-             $sth = $db->query ("UPDATE  `jobseeker_ads_qualification` SET  `marks`='$skill7[$i]',`university`='$skill8[$i]', `yearpassing`='$skill9[$i]'  WHERE `guid`='$gu_id[$i]'");
-           
-         
-
-            } else {
-           
-          // echo ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$dt','$guid','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");exit;  
-                
-            $sth = $db->query ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$dt','$guid','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");
-           
-            }
-
-
-         }
+      if ($skill =='') {
+      $sth = $db->query ("UPDATE  `jobseeker_ads_qualification` SET  `marks`='$skill7[$i]',`university`='$skill8[$i]', `yearpassing`='$skill9[$i]'  WHERE `guid`='$gu_id[$i]'");
+      } else {
+      // echo ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$dt','$guid','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");exit;  
+       $sth = $db->query ("INSERT INTO `jobseeker_ads_qualification` (`jbaq_id`,`js_id`,`txtEducation`,`specialisation`,`marks`,`university`,`yearpassing`) VALUES('$dt','$guid','$skill[$i]','$skill6[$i]','$skill7[$i]','$skill8[$i]','$skill9[$i]')");
+       }
+       }
     
     
 	if($sth > 0) {
@@ -429,26 +418,17 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
             <p><strong>Educational Information:</strong></p><br>
 						<table class="table" id="dynamic_field">
            
-			<tr>
+			        <tr>
               <?php 
-			 $m = $db->query("SELECT * FROM  `jobseeker_ads_qualification` WHERE  js_id='$guid'"); 
-            while($z = $m->fetch()){
-                
-                
-                
-                
-      
-          $tth = $db->query ("SELECT * FROM `qualification` WHERE `guid` = $z[3]");
-          $trow = $tth-> fetch(); 
-          $tthd = $db->query ("SELECT * FROM `specialisation` WHERE `guid` = $z[4]");
-          $tsugu = $tthd-> fetch(); 
-          //print_r($tsugu);exit;
-        
-          
-          ?>
-
-
-							<div class="col-sm-3">
+              $m = $db->query("SELECT * FROM  `jobseeker_ads_qualification` WHERE  js_id='$guid'"); 
+              while($z = $m->fetch()){
+              $tth = $db->query ("SELECT * FROM `qualification` WHERE `guid` = $z[3]");
+              $trow = $tth-> fetch(); 
+              $tthd = $db->query ("SELECT * FROM `specialisation` WHERE `guid` = $z[4]");
+              $tsugu = $tthd-> fetch(); 
+              //print_r($tsugu);exit;
+              ?>
+              <div class="col-sm-3">
               <td> 
                 <label  class="control-label">Qualification</label>
                   <select class="form-control required super"  id="cid" readonly >

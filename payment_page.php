@@ -22,12 +22,11 @@
    $mat = $db->query("SELECT * FROM  `add_services` WHERE  `phone_no1`='$mobile' AND `productid`='$ref_id'");
    }else if($_POST['service'] == 'Matrimonial AD'){
    $matr_add = $db->query("SELECT * FROM  `matrimonial_ads` WHERE  `txtMobile`='$mobile' AND `productid`='$ref_id'");
-   } else {
-    echo 'Job Seeker AD';
+   }if($_POST['service'] == 'Job Seeker AD') {
+    $jobseekar_add = $db->query("SELECT * FROM  `jobseeker_ads` WHERE  `txtMobile`='$mobile' AND `productid`='$ref_id'");
    }      
  
-
-  ?>
+?>
   
 <!DOCTYPE html>
 <html lang="en">
@@ -128,12 +127,13 @@
       <?php if($_POST['service'] == 'Classified TEXT AD'){ ?>
       <table class='table table-bordered table-hover'>
 			<tr>
+      <th width='5%'>Service Type</th>
       <th width='5%'>Name</th>
-      <th width='5%'>Mobile Number</th>
+      <th width='4%'>Mobile Number</th>
       <th width='5%'>Email</th>
-      <th width='5%'>Status</th>
-      <th width='5%'>Update Profile</th>
-      <th width='5%'>Payment</th>
+      <th width='2%'>Status</th>
+      <th width='3%'>Update Profile</th>
+      <th width='3%'>Payment</th>
        </tr>
 			<?php 
       if($serth->rowCount() > 0){
@@ -141,6 +141,7 @@
       while($ta_row = $serth->fetch()){
       ?>
 			<tr>
+      <td><input type='text' class=' table form-control col-3' value="Classified TEXT AD"  placeholder='Enter Name'/></td>
 			<td><input type='text' class=' table form-control col-3' value="<?php echo $ta_row['txtName'];?>"  placeholder='Enter Name'/></td>
 			<td><input type='text' class=' table form-control col-3' value="<?php echo $ta_row['txtMobile'];?>"  placeholder='Email'/></td>
       <td><input type='text' class=' table form-control col-3' value="<?php echo $ta_row['txtEmail'];?>"  placeholder='Email'/></td>
@@ -168,7 +169,7 @@
 		  </tr>
       <?php $i++;  } } else { ?>
 			<tr >
-      <td colspan="6" style="text-align: center"> 
+      <td colspan="7" style="text-align: center"> 
       <div class="td-bg-first" style= "color:red"> <b><?php echo "No result Found...!" ?></b></div>
       </td>
       </tr>
@@ -181,12 +182,13 @@
      
       <table class='table table-bordered table-hover'>
 			<tr>
+      <th width='5%'>Service Type</th>
       <th width='7%'>Name</th>
       <th width='4%'>Mobile Number</th>
       <th width='5%'>Email</th>
       <th width='3%'>Status</th>
       <th width='3%'>Update Profile</th>
-      <th width='3%'>Payment</th>
+      <th width='2%'>Payment</th>
        </tr>
 			<?php 
       
@@ -194,7 +196,7 @@
       $n = 1;
       while($mat_row = $mat->fetch()){
       ?>
-			<tr>
+			<tr><td><input type='text' class=' table form-control col-3' value="Business AD"  placeholder='Enter Name'/></td>
 			<td><input type='text' class=' table form-control col-3' value="<?php echo $mat_row['add_title'];?>"  placeholder='Enter Name'/></td>
 			<td><input type='text' class=' table form-control col-3' value="<?php echo $mat_row['phone_no1'];?>"  placeholder='Email'/></td>
       <td><input type='text' class=' table form-control col-3' value="<?php echo $mat_row['email_id'];?>"  placeholder='Email'/></td>
@@ -222,7 +224,7 @@
 		  </tr>
       <?php $i++;  } } else { ?>
 			<tr >
-      <td colspan="6" style="text-align: center"> 
+      <td colspan="7" style="text-align: center"> 
       <div class="td-bg-first" style= "color:red"> <b><?php echo "No result Found...!" ?></b></div>
       </td>
       </tr>
@@ -276,21 +278,75 @@
 		  </tr>
       <?php $i++;  } } else { ?>
 			<tr >
-      <td colspan="6" style="text-align: center"> 
+      <td colspan="7" style="text-align: center"> 
       <div class="td-bg-first" style= "color:red"> <b><?php echo "No result Found...!" ?></b></div>
       </td>
       </tr>
       <?php } ?>
 			
 			</table>
-    <?php } else { ?>
+    <?php } if($_POST['service'] == 'Job Seeker AD'){ ?>
 
 
-   <?php echo 'Job Seeker AD'; ?>
+      <table class='table table-bordered table-hover'>
+			<tr>
+      <th width='5%' style="text-align: center">Service Type</th>
+      <th width='5%' style="text-align: center">Name</th>
+      <th width='4%' style="text-align: center">Mobile Number</th>
+      <th width='5%' style="text-align: center">Email</th>
+      <th width='3%' style="text-align: center">Status</th>
+      <th width='2%' style="text-align: center">Update Profile</th>
+      <th width='2%' style="text-align: center">View Resume</th>
+      <th width='2%' style="text-align: center">Payment</th>
+       </tr>
+			<?php 
+      if($jobseekar_add->rowCount() > 0){
+      $n = 1;
+      while($jobseekaradd_row = $jobseekar_add->fetch()){
+      ?>
+			<tr>
+      <td><input type='text' class=' table form-control col-3' value="Job Seeker AD"  placeholder='Enter Name'/></td>
+			<td><input type='text' class=' table form-control col-3' value="<?php echo $jobseekaradd_row['txtName'];?>"  placeholder='Enter Name'/></td>
+			<td><input type='text' class=' table form-control col-3' value="<?php echo $jobseekaradd_row['txtMobile'];?>"  placeholder='Email'/></td>
+      <td><input type='text' class=' table form-control col-3' value="<?php echo $jobseekaradd_row['txtEmail'];?>"  placeholder='Email'/></td>
+      <td><?php if($jobseekaradd_row['status']==''){?>
+        <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Not Activated yet</span><?php }?>
+        <?php if($jobseekaradd_row['status']=='DeActive'){?>
+        <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Subscription plan Completed</span><?php }?>
+
+        <?php if($jobseekaradd_row['status']=='Active'){?>
+        <span class='btn btn-block btn-sm btn-success disabled green_btn'>Active</span><?php }?>
+      
+      </td>
+      <td style="text-align: center">
+      <a href="Updated_jobseeker_ad.php?guid=<?php echo $jobseekaradd_row['guid']; ?>"><button type="submit"  class="btn btn-info btn-sm">Update</button></a>
+      </td>
+      <td style="text-align: center">
+      <a href="view_resume.php?profile=<?php echo $jobseekaradd_row['pid'];?>"><button type="submit"  class="btn btn-warning btn-sm">Resume</button></a>
+      </td>
+      <td>
+      <?php if(($jobseekaradd_row['status']=='' || $jobseekaradd_row['status']=='DeActive' )){?>
+        <a href="add-packages.php?adid=<?php echo $jobseekaradd_row['guid']; ?>"><button type="submit" name="" value="" class="btn btn-info btn-sm">Pay Now</button></a>
+        <?php }?>
+        <?php if($jobseekaradd_row['status']=='Active'){?>
+        <span class='btn btn-block btn-sm btn-success disabled green_btn'>Payment Done</span><?php }?>
+      </td>
+
+		  </tr>
+      <?php $i++;  } } else { ?>
+			<tr >
+      <td colspan="7" style="text-align: center"> 
+      <div class="td-bg-first" style= "color:red"> <b><?php echo "No result Found...!" ?></b></div>
+      </td>
+      </tr>
+      
+      <?php } ?>
+			
+			</table>
 
 
 
-   
+
    <?php }     ?>
 
 

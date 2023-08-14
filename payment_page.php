@@ -240,8 +240,9 @@
       <th width='5%'>Name</th>
       <th width='4%'>Mobile Number</th>
       <th width='5%'>Email</th>
-      <th width='4%'>Status</th>
-      <th width='5%'>Update Profile</th>
+      <th width='2%'>View biodata</th>
+      <th width='2%'>Status</th>
+      <th width='3%'>Update Profile</th>
       <th width='3%'>Payment</th>
        </tr>
 			<?php 
@@ -254,6 +255,7 @@
 			<td><input type='text' class=' table form-control col-3' value="<?php echo $mattri_row['txtName'];?>"  placeholder='Enter Name'/></td>
 			<td><input type='text' class=' table form-control col-3' value="<?php echo $mattri_row['txtMobile'];?>"  placeholder='Email'/></td>
       <td><input type='text' class=' table form-control col-3' value="<?php echo $mattri_row['txtEmail'];?>"  placeholder='Email'/></td>
+      <td style="text-align: center"> <a href="view_biodata.php?profile=<?php echo $mattri_row['pid']; ?>"><button type="submit" name="" value=""class="btn btn-warning btn-sm">View Bidata</button></a></td>
       <td><?php if($mattri_row['status']==''){?>
         <span class='btn btn-block btn-sm btn-danger disabled green_btn'>Not Activated yet</span><?php }?>
         <?php if($mattri_row['status']=='DeActive'){?>
@@ -278,7 +280,7 @@
 		  </tr>
       <?php $i++;  } } else { ?>
 			<tr >
-      <td colspan="7" style="text-align: center"> 
+      <td colspan="8" style="text-align: center"> 
       <div class="td-bg-first" style= "color:red"> <b><?php echo "No result Found...!" ?></b></div>
       </td>
       </tr>

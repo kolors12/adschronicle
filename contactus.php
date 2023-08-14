@@ -169,30 +169,26 @@ google.maps.event.addDomListener(window, 'load', initialize);
           <div class="col-md-12">
           <h5 style="color:#F30;"><strong>List of Authorized Advertising Agencies/Resellers:</strong></h5>
           </div>
+          
+           <?php  $serth = $db->query("SELECT * FROM  `agencies` WHERE  `hot`='YES'");
+         if($serth->rowCount() > 0){
+          $n = 1;
+          while($ta_row = $serth->fetch()){
+          ?>
+        
           <div class="col-md-12">
           <div style="background-color:#eee; padding:10px; margin-bottom:5px">
-        <p><strong>CMS Computer Institute</strong></p>
-        <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.</p>
+        <p><strong><?php echo $ta_row['name']?></strong></p>
+        <p><?php echo $ta_row['address']?></p>
       </div>
       </div>
-      <div class="col-md-12">
-          <div style="background-color:#eee; padding:10px; margin-bottom:5px">
-        <p><strong>CMS Computer Institute</strong></p>
-        <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.</p>
-      </div>
-      </div>
-      <div class="col-md-12">
-          <div style="background-color:#eee; padding:10px; margin-bottom:5px">
-        <p><strong>CMS Computer Institute</strong></p>
-        <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.</p>
-      </div>
-      </div>
-      <div class="col-md-12">
-          <div style="background-color:#eee; padding:10px; margin-bottom:5px">
-        <p><strong>CMS Computer Institute</strong></p>
-        <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.</p>
-      </div>
-      </div>
+       <?php $i++;  } } else { ?>
+			
+      <div class="td-bg-first" style= "color:green;text-align: center;" > <b><?php echo "No Agencies Found...!" ?></b></div>
+      
+      <?php } ?>
+     
+     
           </div>
           
         </div>

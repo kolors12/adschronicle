@@ -3,6 +3,7 @@
   require("cw_admin/lib/config.php");
   extract($_POST);$msg='Verify';
   if($_POST['mobile']!='')
+  
   {
   $vcode=rand(999,9999);
 // $message="Dear User, Verification code is $vcode Thank you, AdsChronicle.com";

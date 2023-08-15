@@ -105,7 +105,9 @@
         </form>
         <div class="clearfix"></div>
         <div class="col-md-12" style="margin-top:20px">
-          <?php if(($serth->rowCount() > 0) && ($_GET['search']=='Search') ){
+          <?php //if(($serth->rowCount() > 0) && ($_GET['search']=='Search') ){
+             if ($_GET['search']=='Search') {
+             if($serth->rowCount() > 0) {
             foreach($serth as $lrow){
             $mth = $db->query("SELECT * FROM  `jobseeker_ads` WHERE `status`='Active' AND `txtCity` LIKE '%".$_COOKIE['areaname']."%' AND `txtJobCategory` = '".$lrow[0]."'  $srr ORDER BY `guid` DESC");
             if($mth->rowCount() > 0){
@@ -158,13 +160,14 @@
                 <?php } ?>
             </div>
           </div>
-          <?php }else{ echo "Currently No Job seekers matching your requirement, Please Try Later";} } ?> 
           <div class="col-md-12" align="right"> 
             <input type="button"  class="btn btn-info send-message" value="Send message to selected jobseeker">
           </div>
+          <?php } } } else { echo "Currently No Job seekers matching your requirement, Please Try Later";} } ?> 
+         
 
           
-          <?php }else{ echo "Currently No Job seekers matching your requirement, Please Try Later"; } ?>
+          <?php // }else{ echo "Currently No Job seekers matching your requirement, Please Try Later"; } ?>
         </div>
         <div class="clearfix"></div>
       </div>

@@ -41,6 +41,7 @@
       </li>
       <!-- BEGIN COMPONENTS DROPDOWN -->
       <li><a href="<?php echo URL; ?>agencies.php"><i class="glyphicon glyphicon-th-list"></i> Agencies </a></li>
+      <li><a href="<?php echo URL; ?>brides.php"><i class="glyphicon glyphicon-th-list"></i> Brides Search</a></li>
       <li> <a href="<?php echo URL; ?>franchise_requests.php"> <i class="fa fa-dashboard"></i> Reseller/Franchise Requests </a> </li>
       <li><a href="<?php echo URL; ?>services.php"> <i class="fa fa-dashboard"></i> View Category Ads</a> </li>
       <li><a href="<?php echo URL; ?>vochure_requests.php"> <i class="fa fa-dashboard"></i> Discount &amp; Vochures</a> </li>

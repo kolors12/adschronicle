@@ -243,7 +243,7 @@
 			 <?php foreach($mth as $row){ ?>
               <div class="row" style="border:1px #eee solid; margin:5px">
                 <div class="col-md-2" align="center">
-                  <img src="adminupload/<?php echo $row['image1']?>" style="height:150px; width:100%; padding:3px" alt=""/> 
+                  <img src="adminupload/<?php echo $row['image1']?>" style="height:200px; width:110%; padding:3px" alt=""/> 
                   <p><strong><?php echo $row['productid']?></strong></p>
                 </div>
                 <div class="col-md-9">

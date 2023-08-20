@@ -270,6 +270,7 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
 		//$sth->execute();
 		header('location:'.URL.'sub.php?sid='.$sid); 
 	} else { ?>
+    <a href="<?php echo URL; ?>sub.php?action=addNew" class="btn btn-info">Add New</a>
     <div class="row">
       <div class="col-lg-8">
         <?php if(!empty($post_msg)) { ?>
@@ -282,7 +283,7 @@ if(isset($_POST) && $_POST['submit'] == 'SaveEdit') {
         <div class="portlet table-responsive"><!-- /Portlet -->
           <div class="portlet-heading dark">
             <div class="portlet-title">
-              <h4><?php echo $trow[1]; ?>-Areas</h4>
+              <h4><?php echo $trow[1]; ?>Sub Category Name</h4>
             </div>
             <div class="portlet-widgets"> <a data-toggle="collapse" data-parent="#accordion" href="#basic"><i class="fa fa-chevron-down"></i></a> <span class="divider"></span> <a href="#" class="box-close"><i class="fa fa-times"></i></a> </div>
             <div class="clearfix"></div>

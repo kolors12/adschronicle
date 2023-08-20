@@ -279,8 +279,9 @@ if(isset($_POST) && $_POST['submit']=='editdata') {
                        <th data-class="expand" class="center">Ref Number</th>
                       <th data-class="expand" class="center">Details</th>
                       <th data-class="expand" class="center">Ad Details</th>
+                      <!-- <th data-class="expand" class="center">Ad Content</th> -->
                       <th data-class="expand" class="center">Ad Content</th>
-		      <th data-class="expand" class="center">Date of Posting</th>
+		                  <th data-class="expand" class="center">Date of Posting</th>
                       <th data-class="expand" class="center">Date of Activation</th>
                       <th data-class="expand" class="center">Edit/Trash</th>
                     </tr>
@@ -310,11 +311,12 @@ if(isset($_POST) && $_POST['submit']=='editdata') {
                         <label><input type="radio" onclick="window.location='<?php echo URL; ?>add_requests.php?action=changeStatus&guid=<?php echo $row[0]; ?>&status=DeActive'" <?php if($row['status']=='DeActive'){ echo "checked"; }?> /> DeActivate</label><br />
                         </div>
                         </td>
- <td class="center"><small><?php echo 'ADS'.-$row['guid']; ?></small></td>
+                      <td class="center"><small><?php echo 'ADS'.-$row['guid']; ?></small></td>
                       <td class="center"><small><b>Name:</b> <?php echo $row['txtName']; ?><br /><b>Email Id:</b> <?php echo $row['txtEmail']; ?><br /><b>Mobile:</b> <?php echo $row['txtMobile']; ?></small></td>
                       <td class="center"><small><b>City:</b> <?php echo $lrow['name']; ?><br />
                       <b>Ad Category:</b> <?php echo $lroo['name']; ?><br /><b>Ad Title:</b> <?php echo $lrr['name']; ?><br /><b>Ad Membership no:</b> <?php echo $row['txtMembership_no']; ?></small></td>
-                      <td class="center" width="20%"><div class="panel panel-body"><?php $des = str_replace("^^","'",$row['txtContent']); echo $des = str_replace('~~','"',$des); ?></div></td>
+                      <!-- <td class="center" width="10%"><div class="panel panel-body"><?php// $des = str_replace("^^","'",$row['txtContent']); echo $des = str_replace('~~','"',$des); ?></div></td> -->
+                      <td class="center"><a href="javascript:;" class="btn btn-xs btn-info content-button" data-id="<?php echo $row[0] ?>"></i>Contect</a></td>
                       <!--<td class="center"><a href="../adminupload/<?php //echo $row['txtFile']; ?>" target="_blank"><?php //echo $row['txtFile']; ?></a></td>-->
 					  <td class="center"><?php echo $row['date']; ?></td>
                       <td class="center"><?php if($row['active_date']!='' && $row['active_date']!='0000-00-00')echo $row['active_date']; else echo "Not Activated yet" ?></td>
@@ -340,6 +342,32 @@ if(isset($_POST) && $_POST['submit']=='editdata') {
   <!-- END MAIN PAGE CONTENT --> 
 </div>
 </div>
+
+
+
+
+<div class="modal fade" id="content-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Ad Content</h4>
+      </div>
+      <div class="modal-body content-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
 
 
 <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog">
@@ -430,6 +458,22 @@ $.ajax({
 	   });
 
 })
+
+
+
+$('.content-button').click(function(){
+var id= $(this).data('id');
+$.ajax({
+		  type:"post",
+		  url:"<?php echo URL; ?>ajaxpayment2.php",
+		  data:"guid="+id+"&action=classifiedad",
+			  success:function(response){
+				  $('.content-body').html(response);
+                  $('#content-modal').modal("show", {backdrop: 'static'});
+				return true;
+		  }
+	   });
+});
 
 
 $('.payment-button').click(function(){

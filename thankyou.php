@@ -71,7 +71,7 @@ $date = date('Y-m-d');
     	    if($_GET['addtype']=='CLASSIFIED TEXT AD'){
 
 
-	$sth = $db->query("UPDATE `adds_requests` SET `trackingid`='$trackingid',`bank_ref`='$bank_ref',`order_status`='$order_status',`statusmsg`='$statusmsg' WHERE `guid`='$orderid'");
+	$sth = $db->query("UPDATE `adds_requests` SET `trackingid`='$trackingid',`bank_ref`='$bank_ref',`order_status`='$order_status',`statusmsg`='$statusmsg',`status`='Active' WHERE `guid`='$orderid'");
 
  }
 

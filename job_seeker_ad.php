@@ -339,9 +339,16 @@
 							<div class="col-sm-3">
                 <td>
                   <label  class="control-label">Specialisation</label>
-                  <select class="form-control required area" name="specialisation[]" id="aid" required>
+                  <select class="form-control required area" name="specialisation[]" id="aid" onchange='CheckColors(this.value);' required>
                     <option value="">Select Specialisation</option>
                   </select>
+                </td>
+              </div>
+             
+              <div class="col-sm-3">
+                <td>
+                  <label  class="control-label"style='color:white;'>fff</label>
+                  <input type="text" class="form-control required" name="specialisation2" id="specialisation2" style='display:none;' placeholder="Enter Specialisation"/>
                 </td>
               </div>
 							<div class="col-sm-1">
@@ -609,7 +616,7 @@
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td> <select class="form-control required quali" name="txtEducation[]" id="quali_'+i+'" ><option value="">Select Qualifications</option><?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc"); while($row = $sth->fetch()) { echo '<option value='.$row[0].'>'.$row['name'].'</option>'; } ?></select></td><td> <select class="form-control required spec" name="specialisation[]" id="spec_'+i+'" required><option value="">Select Specialisation</option></select></td> <td><input type="number" name="marks[]" placeholder="% Marks" class="form-control name_list" /></td><td><input type="text" name="university[]" placeholder="University Name" class="form-control name_list" /></td><td><input type="text" maxlength="4" name="yearpassing[]" placeholder="Year of Passing" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td> <select class="form-control required quali" name="txtEducation[]" id="quali_'+i+'" ><option value="">Select Qualifications</option><?php $sth = $db->query ("SELECT * FROM `qualification` order by name asc"); while($row = $sth->fetch()) { echo '<option value='.$row[0].'>'.$row['name'].'</option>'; } ?></select></td><td> <select class="form-control required spec" name="specialisation[]" id="spec_'+i+'" onchange="CheckColors(this.value);" required><option value="">Select Specialisation</option></select></td>   <td><input type="text" name="specialisation3" id="specialisation3" style="display:none;" placeholder="% Marks" class="form-control name_list" /></td>      <td><input type="number" name="marks[]" placeholder="% Marks" class="form-control name_list" /></td><td><input type="text" name="university[]" placeholder="University Name" class="form-control name_list" /></td><td><input type="text" maxlength="4" name="yearpassing[]" placeholder="Year of Passing" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
 	
 	$('#quali_'+i).change(function(){
      // alert('hi');
@@ -626,7 +633,7 @@
     }
     });
     });
-	    
+
 	    
 	});
 	
@@ -636,7 +643,14 @@
 	});
 });
 
-
+function CheckColors(val){
+ var element=document.getElementById('specialisation2');
+ console.log(val);
+ if(val=='pick a color'||val=='44'||val=='45')
+   element.style.display='block';
+ else  
+   element.style.display='none';
+}
 
   
 

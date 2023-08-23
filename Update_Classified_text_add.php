@@ -102,6 +102,8 @@ if($sth > 0) {?>
 
                     </select>
                     </div>
+
+
                    <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
                    
@@ -127,6 +129,11 @@ if($sth > 0) {?>
                   </select>
                     
                   </div>
+
+                  
+
+                
+
                   <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
                     <textarea class="form-control text required" id="txtContent" rows="5" name="txtContent" minlength="30"   maxlength="400"  placeholder="Enter Ad Content" rows="2"><?php echo $row['txtContent'];?></textarea>
                   </div>
@@ -181,6 +188,42 @@ $.ajax({
 	   });
 
 })
+
+$(document).ready(function(){
+    $('#country').on('change',function(){
+        var countryID = $(this).val();
+        if(countryID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'country_id='+countryID,
+                success:function(html){
+                    $('#state').html(html);
+                    $('#city').html('<option value="">Select Ad Title</option>'); 
+                }
+            }); 
+        }else{
+            $('#state').html('<option value="">Select Ad Title</option>');
+            $('#city').html('<option value="">Select Ad Title</option>'); 
+        }
+    });
+    
+    $('#state').on('change',function(){
+        var stateID = $(this).val();
+        if(stateID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'state_id='+stateID,
+                success:function(html){
+                    $('#city').html(html);
+                }
+            }); 
+        }else{
+            $('#city').html('<option value="">Select Ad Title</option>'); 
+        }
+    });
+});
   </script>
 </body>
 </html>
